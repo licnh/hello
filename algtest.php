@@ -16,15 +16,18 @@ class AlgTest{
      * @return  boolean 是否成功
      */
     public function heapSort(array &$arr){
-        if (!$arr){
+        //检查数组
+        if (!$this->checkArr($arr)){
             return false;
-        } elseif (count($arr) == 1){
+        }
+        //判断数组长度
+        if (count($arr) == 1){
             return true;
         }
 
         $last = count($arr) - 1;
         for(; $last>0; $last--){
-            $this->sortNode($arr, $last);
+            $this->sortNodeIter($arr, $last);
             $this->swap($arr[0],$arr[$last]);
         }
         return true;
@@ -36,7 +39,7 @@ class AlgTest{
      * @param integer $last 未排序队列最后一个元素的下标
      * @var   integer $idx 当前要比较的节点，即最后一个未入堆的非叶子节点下标
      */
-    private function sortNode(array &$arr, $last){
+    private function sortNodeIter(array &$arr, $last){
         $idx = floor(($last + 1) / 2) - 1;
         for (; $idx >= 0; $idx--) {
             $max_idx = $idx;
@@ -59,7 +62,7 @@ class AlgTest{
      * @param integer $last 未排序队列最后一个元素的下标
      * @param integer $idx 当前要比较的节点，即最后一个未入堆的非叶子节点下标
      */
-    private function sortNodeByDiGui(array &$arr, $last, $idx = -1){
+    private function sortNodeRec(array &$arr, $last, $idx = -1){
         if($idx < 0)
             $idx = floor(($last + 1) / 2) - 1;
         $max_idx = $idx;
@@ -74,20 +77,25 @@ class AlgTest{
             $this->swap($arr[$max_idx], $arr[$idx]);
         }
         if($idx>0){
-            $this->sortNodeByDiGui($arr, $last, $idx-1);
+            $this->sortNodeRec($arr, $last, $idx-1);
         }
     }
 
     /**
      * 冒泡排序
      * 从前往后循环n-1次，第i次循环就将前n-i个元素中最大的放在第n-i位
+     * 最好情况排序好的队列O(n)
+     * 最差情况排序相反的队列O(n^2)
      * @param array $arr
      * @return bool
      */
     public function bubbleSort(array &$arr){
-        if (!$arr){
+        //检查数组
+        if (!$this->checkArr($arr)){
             return false;
-        } elseif (count($arr) == 1){
+        }
+        //判断数组长度
+        if (count($arr) == 1){
             return true;
         }
         $last = count($arr) - 1;
@@ -101,9 +109,74 @@ class AlgTest{
         return true;
     }
 
+    /**
+     * 快速排序
+     * 非递归方法，因为递归容易溢出调用栈
+     * 最优的情况每一次取到的元素都刚好平分整个数组 O(nlogn)
+     * 最差每次取的Mark值都是当前队列最值 O(n^2)
+     * @param array $arr
+     * @return bool
+     */
+    public function quickSort(array &$arr){
+        //检查数组
+        if (!$this->checkArr($arr)){
+            return false;
+        }
+        //判断数组长度
+        if (count($arr) == 1){
+            return true;
+        }
+        $stack = array($arr);
+        $arr = array();
+
+        //栈空即跳出循环
+        while ($stack) {
+            //$current_arr指当前需要划分的子数组,入栈时从大到小，出栈时由小到大
+            $current_arr = array_pop($stack);
+            if (count($current_arr) <= 1) {
+                $arr[] = &$current_arr[0];
+                continue;
+            }
+            $mark = $current_arr[0];
+            $big = array();
+            $small = array();
+
+            //用两个数组分别接受比$mark小和比$mark大的数据
+            for ($i = 1; $i < count($current_arr); $i++) {
+                if ($current_arr[$i] <= $mark) {
+                    array_push($small,$current_arr[$i]);
+                } else {
+                    array_push($big,$current_arr[$i]);
+                }
+            }
+
+            //入栈，从大到小，以便出栈时由小到大
+            if (!empty($big)) {
+                array_push($stack, $big);
+            }
+            array_push($stack, array($current_arr[0]));
+
+            if (!empty($small)) {
+                array_push($stack, $small);
+            }
+        }
+        return true;
+        
+    }
+
+
+
     //交换两个变量的值
     private function swap(&$a, &$b){
         $a ^= $b ^= $a ^= $b;
+    }
+
+    //检查数组
+    private function checkArr(array $arr){
+        if (!$arr || !is_array($arr)){
+            return false;
+        }
+        return true;
     }
 
     //展示排序功能
@@ -118,6 +191,7 @@ class AlgTest{
 
         $this->activeSort($arr,"bubbleSort");
         $this->activeSort($arr,"heapSort");
+        $this->activeSort($arr,"quickSort");
 
 //        echo "排序后：".implode(", ", $arr)."<br>";
     }
@@ -126,11 +200,12 @@ class AlgTest{
         if(!method_exists($this, $do))
             exit("<hr>不存在方法 $do");
         $t = -microtime(true);
+        shuffle($arr);
         if(!$this->$do($arr)){
             exit("<hr>$do 出错skrskrskr！！！");
         }
-        $t = round($t + microtime(true), 4);
-        echo "$do 用时 $t s 平均：".$t/count($arr)."<br>";
+        $t = round(($t + microtime(true))*1000, 2);
+        echo "$do 用时 $t ms <br>";
     }
 }
 
