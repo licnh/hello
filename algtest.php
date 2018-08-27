@@ -16,10 +16,11 @@ class AlgTest{
      * @return  boolean 是否成功
      */
     public function heapSort(array &$arr){
-        if (!$arr | count($arr) < 1)
+        if (!$arr){
             return false;
-        elseif (count($arr) == 1)
+        } elseif (count($arr) == 1){
             return true;
+        }
 
         $last = count($arr) - 1;
         for(; $last>0; $last--){
@@ -77,25 +78,61 @@ class AlgTest{
         }
     }
 
+    /**
+     * 冒泡排序
+     * 从前往后循环n-1次，第i次循环就将前n-i个元素中最大的放在第n-i位
+     * @param array $arr
+     * @return bool
+     */
+    public function bubbleSort(array &$arr){
+        if (!$arr){
+            return false;
+        } elseif (count($arr) == 1){
+            return true;
+        }
+        $last = count($arr) - 1;
+        for ($i = 0; $i < count($arr) - 1; $i++, $last--){
+            for($j= 0; $j < $last; $j++){
+                if($arr[$j] > $arr[$j+1]){
+                    $this->swap($arr[$j], $arr[$j+1]);
+                }
+            }
+        }
+        return true;
+    }
+
     //交换两个变量的值
-    function swap(&$a, &$b){
+    private function swap(&$a, &$b){
         $a ^= $b ^= $a ^= $b;
+    }
+
+    //展示排序功能
+    public function showSort($count = 100){
+        //设置网页不超时 防止排序时间过长
+        set_time_limit(0);
+        //生成数组，随机排序
+        $arr = range(1,$count);
+        shuffle($arr);
+
+//        echo "排序前：".implode(", ", $arr)."<br>";
+
+        $this->activeSort($arr,"bubbleSort");
+        $this->activeSort($arr,"heapSort");
+
+//        echo "排序后：".implode(", ", $arr)."<br>";
+    }
+
+    private function activeSort(array &$arr, $do = "bubbleSort"){
+        if(!method_exists($this, $do))
+            exit("<hr>不存在方法 $do");
+        $t = -microtime(true);
+        if(!$this->$do($arr)){
+            exit("<hr>$do 出错skrskrskr！！！");
+        }
+        $t = round($t + microtime(true), 4);
+        echo "$do 用时 $t s 平均：".$t/count($arr)."<br>";
     }
 }
 
-//生成数组，随机排序
-$arr = range(1,3000);
-shuffle($arr);
-//echo "排序前：".implode(", ", $arr);
 
-set_time_limit(0);
-$t = -microtime(true);
-
-(new AlgTest())->heapSort($arr);
-
-$t = round($t + microtime(true), 4);
-
-//echo PHP_EOL."排序后：".implode(", ", $arr);
-
-echo PHP_EOL."用时 $t s 平均：".$t/count($arr);
-
+(new AlgTest())->showSort();
