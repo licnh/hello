@@ -36,3 +36,8 @@ while ($status && $count > 0) {
         sleep(2);
     }
 }
+
+//限定的重复次数中未能占用锁
+if($status){
+    echo "可怜！ (｡ŏ_ŏ)";
+}
