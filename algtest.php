@@ -111,7 +111,7 @@ class AlgTest{
 
     /**
      * 快速排序
-     * 非递归方法，因为递归容易溢出调用栈
+     * 迭代使用栈
      * 最优的情况每一次取到的元素都刚好平分整个数组 O(nlogn)
      * 最差每次取的Mark值都是当前队列最值 O(n^2)
      * @param array $arr
@@ -161,13 +161,59 @@ class AlgTest{
             }
         }
         return true;
-        
+    }
+
+    /**
+     * 快速排序
+     * 使用递归,容易溢出调用栈
+     * @param array $arr
+     * @return bool
+     */
+    public function quickSortRec(array &$arr){
+        //检查数组
+        if (!$this->checkArr($arr)){
+            return false;
+        }
+        //判断数组长度
+        if (count($arr) == 1){
+            return true;
+        }
+        $this->quickRec($arr, 0, count($arr)-1);
+        return true;
+    }
+
+    //递归快排
+    private function quickRec(&$arr, $left, $right){
+        if($left>=$right) return;
+        $temp = $arr[$left];
+        $i = $left;
+        $j = $right;
+        while ($i < $j){
+            while($i < $j && $arr[$j] > $temp){
+                $j--;
+            }
+            while($i < $j && $arr[$i] <= $temp ){
+                $i++;
+            }
+            if($i < $j){
+                $this->swap($arr[$i], $arr[$j]);
+            }
+
+        }
+        if($left<$i){
+            $this->swap($arr[$left],$arr[$i]);
+        }
+        $this->quickRec($arr, $left, $i - 1);
+        $this->quickRec($arr, $i + 1, $right);
+        return;
     }
 
 
 
     //交换两个变量的值
     private function swap(&$a, &$b){
+        //当ab相等时为0
+        if($a == $b) return;
         $a ^= $b ^= $a ^= $b;
     }
 
@@ -182,26 +228,25 @@ class AlgTest{
     //展示排序功能
     public function showSort($count = 100){
         //设置网页不超时 防止排序时间过长
-        set_time_limit(0);
+        set_time_limit(100);
         //生成数组，随机排序
         $arr = range(1,$count);
         shuffle($arr);
 
-//        echo "排序前：".implode(", ", $arr)."<br>";
-
         $this->activeSort($arr,"bubbleSort");
         $this->activeSort($arr,"heapSort");
         $this->activeSort($arr,"quickSort");
+        $this->activeSort($arr,"quickSortRec");
 
-//        echo "排序后：".implode(", ", $arr)."<br>";
+        echo "排序后：".implode(", ", $arr)."<br>";
     }
 
-    private function activeSort(array &$arr, $do = "bubbleSort"){
+    private function activeSort(array &$arr, $do = "bubbleSort", $parameter = null){
         if(!method_exists($this, $do))
             exit("<hr>不存在方法 $do");
         $t = -microtime(true);
         shuffle($arr);
-        if(!$this->$do($arr)){
+        if($parameter ? !$this->$do($arr, $parameter) : !$this->$do($arr)){
             exit("<hr>$do 出错skrskrskr！！！");
         }
         $t = round(($t + microtime(true))*1000, 2);
@@ -210,4 +255,4 @@ class AlgTest{
 }
 
 
-(new AlgTest())->showSort();
+(new AlgTest())->showSort(5);
