@@ -3,7 +3,7 @@
 $lock = 'lock_test';    //设置锁KEY
 $lock_expire = 5;       //设置锁的有效期为5秒
 
-$count = 5;     //等待次数
+$count = 5;     //重试次数
 
 
 assert($redis); //假装连了redis   <(ˉ^ˉ)>
