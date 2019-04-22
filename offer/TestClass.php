@@ -1,5 +1,4 @@
 <?php
-namespace offer\test;
 
 class ListNode{
     var $val;
