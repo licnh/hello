@@ -1,4 +1,6 @@
 <?php
+use offer\test;
+
 /**
  * 二维数组查找
  * 在一个二维数组中（每个一维数组的长度相同），
@@ -80,26 +82,76 @@ function replaceSpace($str)
 
 
 /**
- *
  * 链表值从尾到头的顺序返回一个ArrayList。
- * @param $head {
-            var $val;
-            var $next = NULL;
-            function __construct($x){
-            $this->val = $x;
-        }
+ * @param $head test\ListNode
  * @return array
  */
 function printListFromTailToHead($head)
 {
     $ar = [];
-    getVal($head,$ar);
+    while($head){
+        array_unshift($ar,$head->val);
+        $head = $head->next;
+    }
     return $ar;
 }
 
-function getVal($node,&$ar){
-    if($node->next){
-        getVal($node->next,$ar);
-    }
-    $ar[] = $node->val;
+
+/**
+ * 重建二叉树
+ * 输入某二叉树的前序遍历和中序遍历的结果，重建出该二叉树。
+ * 假设输入的前序遍历和中序遍历的结果中都不含重复的数字。
+ * 例如输入前序遍历序列{1,2,4,7,3,5,6,8}和中序遍历序列{4,7,2,1,5,3,8,6}，则重建二叉树并返回。
+ * @param $pre array 前序遍历结果
+ * @param $vin array 中序遍历结果
+ * @return test\TreeNode 二叉树的根节点
+ */
+function reConstructBinaryTree($pre, $vin)
+{
+    $root = biuldTree( $pre, $vin);
+    return $root;
+
 }
+
+/**
+ * 重建二叉树
+ * 输入某二叉树的前序遍历和中序遍历的结果，重建出该二叉树。
+ * 假设输入的前序遍历和中序遍历的结果中都不含重复的数字。
+ * 例如输入前序遍历序列{1,2,4,7,3,5,6,8}和中序遍历序列{4,7,2,1,5,3,8,6}，则重建二叉树并返回。
+ * @return  test\TreeNode 根节点
+ * @param $pre array 前序遍历结果
+ * @param $vin array 中序遍历结果
+ */
+function  biuldTree($pre, $vin){
+    $left_pre = $right_pre = $left_vin = $right_vin = [];
+
+    $root = $root = new test\TreeNode(array_shift($pre));
+
+    $idx = array_search($root->val,$vin);
+
+    $left_vin = $idx>0
+        ? array_slice($vin,0,$idx-1,false)
+        : null;
+    $right_vin = isset($vin[$idx+1])
+        ? array_slice($vin,$idx+1,null,false)
+        : null;
+
+
+    $idx = array_search($right_vin[0],$pre);
+    $left_pre = array_slice($pre,1,$idx-1,false);
+    $right_pre = array_slice($pre,1,$idx-1,false);
+    if(count($pre) > 0){
+
+        $idx = array_search($root->val,$vin);
+        if($idx!==false && $idx>=1){
+            $root->left = array_slice($pre,1,$idx,false);
+            $right = array_slice($pre,$idx+1,null,false);
+        }elseif ($idx===0){
+
+        }
+    }else{
+        $root = null;
+    }
+    return $root;
+}
+reConstructBinaryTree([1,2,3],[2,1,3]);
