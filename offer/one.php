@@ -50,9 +50,6 @@ function findMe($target, $array)
     return false;
 }
 
-//echo "start:";
-//echo findMe(15,[[1,2,8,9],[2,4,9,12],[4,7,10,13],[6,8,11,15]])?'true':'false';
-
 
 /**
  * 字符串替换
@@ -78,8 +75,6 @@ function replaceSpace($str)
     return $tmp;
 }
 
-//echo "start \n";
-//print_r(replaceSpace('We Are Happy'));
 
 
 /**
@@ -130,4 +125,9 @@ function reConstructBinaryTree($pre, $vin)
     return $root;
 }
 
-print_r(reConstructBinaryTree([1, 2, 4, 7, 3, 5, 6, 8], [4, 7, 2, 1, 5, 3, 8, 6]));
+//print_r(reConstructBinaryTree([1, 2, 4, 7, 3, 5, 6, 8], [4, 7, 2, 1, 5, 3, 8, 6]));
+
+function minNumberInRotateArray($rotateArray)
+{
+    // write code here
+}
