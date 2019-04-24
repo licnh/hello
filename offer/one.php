@@ -135,7 +135,7 @@ function reConstructBinaryTree($pre, $vin)
  * 例如数组{3,4,5,1,2}为{1,2,3,4,5}的一个旋转，该数组的最小值为1。
  * NOTE：给出的所有元素都大于0，若数组大小为0，请返回0。
  * @param $rotateArray
- * @return integer
+ * @return int
  */
 function minNumberInRotateArray($rotateArray)
 {
@@ -168,7 +168,7 @@ function minNumberInRotateArray($rotateArray)
  * 斐波那契数列
  * 现在要求输入一个整数n，输出斐波那契数列的第n项（从0开始，第0项为0）
  * @param $n
- * @return integer
+ * @return int
  */
 function Fibonacci($n)
 {
@@ -189,7 +189,7 @@ function Fibonacci($n)
  * 跳台阶
  * 一只青蛙一次可以跳上1级台阶，也可以跳上2级。求该青蛙跳上一个n级的台阶总共有多少种跳法（先后次序不同算不同的结果）。
  * @param $number
- * @return integer
+ * @return int
  */
 function jumpFloor($number)
 {
@@ -212,7 +212,7 @@ function jumpFloor($number)
  * 变态跳台阶
  * 一只青蛙一次可以跳上1级台阶，也可以跳上2级……它也可以跳上n级。求该青蛙跳上一个n级的台阶总共有多少种跳法。
  * @param $number
- * @return integer
+ * @return int
  */
 function jumpFloorII($number)
 {
@@ -220,4 +220,16 @@ function jumpFloorII($number)
         return 0;
     }
     return $number==1?1:1<<($number-1);
+}
+
+/**
+ * 矩形覆盖
+ * 我们可以用2*1的小矩形横着或者竖着去覆盖更大的矩形。请问用n个2*1的小矩形无重叠地覆盖一个2*n的大矩形，总共有多少种方法？
+ * @param $number int
+ * @return int
+ */
+function rectCover($number)
+{
+    //todo do it!!
+    return 0;
 }
