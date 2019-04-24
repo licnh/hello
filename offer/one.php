@@ -127,7 +127,97 @@ function reConstructBinaryTree($pre, $vin)
 
 //print_r(reConstructBinaryTree([1, 2, 4, 7, 3, 5, 6, 8], [4, 7, 2, 1, 5, 3, 8, 6]));
 
+
+/**
+ * 旋转数组的最小数字
+ * 把一个数组最开始的若干个元素搬到数组的末尾，我们称之为数组的旋转。
+ * 输入一个非减排序的数组的一个旋转，输出旋转数组的最小元素。
+ * 例如数组{3,4,5,1,2}为{1,2,3,4,5}的一个旋转，该数组的最小值为1。
+ * NOTE：给出的所有元素都大于0，若数组大小为0，请返回0。
+ * @param $rotateArray
+ * @return integer
+ */
 function minNumberInRotateArray($rotateArray)
 {
-    // write code here
+    if(empty($rotateArray)||!is_array($rotateArray)){
+        return 0;
+    }
+    $high = count($rotateArray)-1;
+    if($rotateArray[0]<=$rotateArray[$high]){
+        return $rotateArray[0];
+    }
+    $low = 0;
+    while ($low<=$high){
+        if($low==$high){
+            return $rotateArray[$low];
+        }
+        $mid = intval(($low+$high)/2);
+        if($rotateArray[0]>$rotateArray[$mid]){
+            if($rotateArray[$mid]<$rotateArray[$mid-1]){
+                return $rotateArray[$mid];
+            }
+            $high = $mid-1;
+        }else{
+            $low = $mid+1;
+        }
+
+    }
+}
+
+/**
+ * 斐波那契数列
+ * 现在要求输入一个整数n，输出斐波那契数列的第n项（从0开始，第0项为0）
+ * @param $n
+ * @return integer
+ */
+function Fibonacci($n)
+{
+    if($n<2){
+        return $n;
+    }
+    $f1 = 0;
+    $f2 = $f3 = 1;
+    for($i=2;$i<=$n;$i++){
+        $f3 = $f1 + $f2;
+        $f1 = $f2;
+        $f2 = $f3;
+    }
+    return $f3;
+}
+
+/**
+ * 跳台阶
+ * 一只青蛙一次可以跳上1级台阶，也可以跳上2级。求该青蛙跳上一个n级的台阶总共有多少种跳法（先后次序不同算不同的结果）。
+ * @param $number
+ * @return integer
+ */
+function jumpFloor($number)
+{
+    if($number<=0){
+        return 0;
+    }elseif ($number<=2){
+        return $number;
+    }
+    $f1 = $f2 = $f3 = 1;
+    for($i=2;$i<=$number;$i++){
+        $f3 = $f1 + $f2;
+        $f1 = $f2;
+        $f2 = $f3;
+    }
+    return $f3;
+}
+
+
+/**
+ * 变态跳台阶
+ * 一只青蛙一次可以跳上1级台阶，也可以跳上2级……它也可以跳上n级。求该青蛙跳上一个n级的台阶总共有多少种跳法。
+ * @param $number
+ * @return integer
+ */
+function jumpFloorII($number)
+{
+    if($number<=0){
+        return 0;
+    }
+    return $number==1?1:1<<($number-1);
 }

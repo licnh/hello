@@ -9,7 +9,11 @@ $start_time = microtime();
 //$res = findMe(15, [[1, 2, 8, 9], [2, 4, 9, 12], [4, 7, 10, 13], [6, 8, 11, 15]]);
 //$res = replaceSpace('We Are Happy');
 //$res = printListFromTailToHead($head);
-$res = reConstructBinaryTree([1, 2, 4, 7, 3, 5, 6, 8], [4, 7, 2, 1, 5, 3, 8, 6]);
+//$res = reConstructBinaryTree([1, 2, 4, 7, 3, 5, 6, 8], [4, 7, 2, 1, 5, 3, 8, 6]);
+//$res = minNumberInRotateArray([5, 6, 7, 1, 2, 3, 4,]);
+//$res = Fibonacci(9);
+//$res = jumpFloor(9);
+$res = jumpFloorII(0);
 
 
 $end_time = microtime();
@@ -25,6 +29,6 @@ $cost = round(($end_time - $start_time) * 1000, 3);
 
 echo "res:" . PHP_EOL;
 print_r($res);
-echo "----------------------";
-echo PHP_EOL . "cost_time:\t $cost 毫秒" . PHP_EOL;
-echo "<<<<<<<<<<<<<<<<<<<<<<";
+echo PHP_EOL . "----------------------";
+echo PHP_EOL . "cost_time:\t $cost 毫秒";
+echo PHP_EOL . "<<<<<<<<<<<<<<<<<<<<<<";
