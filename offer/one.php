@@ -10,8 +10,7 @@ include_once "TestClass.php";
  * @param $array
  * @return bool
  */
-function findMe($target, $array)
-{
+function findMe($target, $array) {
     $count_x = null;
     if ($array && is_array($array)) {
         foreach ($array as $i => $row) {
@@ -58,8 +57,7 @@ function findMe($target, $array)
  * @param $str
  * @return mixed
  */
-function replaceSpace($str)
-{
+function replaceSpace($str) {
 //    return str_replace(' ','%20',$str);
 //    return implode("%20",explode(" ",$str));
     $tmp = '';
@@ -76,14 +74,12 @@ function replaceSpace($str)
 }
 
 
-
 /**
  * 链表值从尾到头的顺序返回一个ArrayList。
  * @param $head ListNode
  * @return array
  */
-function printListFromTailToHead($head)
-{
+function printListFromTailToHead($head) {
     $ar = [];
     while ($head) {
         array_unshift($ar, $head->val);
@@ -102,9 +98,8 @@ function printListFromTailToHead($head)
  * @param $vin array 中序遍历结果
  * @return TreeNode 二叉树的根节点
  */
-function reConstructBinaryTree($pre, $vin)
-{
-    if ($pre && $pre == $vin ) {
+function reConstructBinaryTree($pre, $vin) {
+    if ($pre && $pre == $vin) {
         $tmp = $root = new TreeNode(null);
         foreach ($pre as $one) {
             $tmp->right = new TreeNode($one);
@@ -137,28 +132,27 @@ function reConstructBinaryTree($pre, $vin)
  * @param $rotateArray
  * @return int
  */
-function minNumberInRotateArray($rotateArray)
-{
-    if(empty($rotateArray)||!is_array($rotateArray)){
+function minNumberInRotateArray($rotateArray) {
+    if (empty($rotateArray) || !is_array($rotateArray)) {
         return 0;
     }
-    $high = count($rotateArray)-1;
-    if($rotateArray[0]<=$rotateArray[$high]){
+    $high = count($rotateArray) - 1;
+    if ($rotateArray[0] <= $rotateArray[$high]) {
         return $rotateArray[0];
     }
     $low = 0;
-    while ($low<=$high){
-        if($low==$high){
+    while ($low <= $high) {
+        if ($low == $high) {
             return $rotateArray[$low];
         }
-        $mid = intval(($low+$high)/2);
-        if($rotateArray[0]>$rotateArray[$mid]){
-            if($rotateArray[$mid]<$rotateArray[$mid-1]){
+        $mid = intval(($low + $high) / 2);
+        if ($rotateArray[0] > $rotateArray[$mid]) {
+            if ($rotateArray[$mid] < $rotateArray[$mid - 1]) {
                 return $rotateArray[$mid];
             }
-            $high = $mid-1;
-        }else{
-            $low = $mid+1;
+            $high = $mid - 1;
+        } else {
+            $low = $mid + 1;
         }
 
     }
@@ -170,14 +164,13 @@ function minNumberInRotateArray($rotateArray)
  * @param $n
  * @return int
  */
-function Fibonacci($n)
-{
-    if($n<2){
+function Fibonacci($n) {
+    if ($n < 2) {
         return $n;
     }
     $f1 = 0;
     $f2 = $f3 = 1;
-    for($i=2;$i<=$n;$i++){
+    for ($i = 2; $i <= $n; $i++) {
         $f3 = $f1 + $f2;
         $f1 = $f2;
         $f2 = $f3;
@@ -191,15 +184,14 @@ function Fibonacci($n)
  * @param $number
  * @return int
  */
-function jumpFloor($number)
-{
-    if($number<=0){
+function jumpFloor($number) {
+    if ($number <= 0) {
         return 0;
-    }elseif ($number<=2){
+    } elseif ($number <= 2) {
         return $number;
     }
     $f1 = $f2 = $f3 = 1;
-    for($i=2;$i<=$number;$i++){
+    for ($i = 2; $i <= $number; $i++) {
         $f3 = $f1 + $f2;
         $f1 = $f2;
         $f2 = $f3;
@@ -214,12 +206,11 @@ function jumpFloor($number)
  * @param $number
  * @return int
  */
-function jumpFloorII($number)
-{
-    if($number<=0){
+function jumpFloorII($number) {
+    if ($number <= 0) {
         return 0;
     }
-    return $number==1?1:1<<($number-1);
+    return $number == 1 ? 1 : 1 << ($number - 1);
 }
 
 /**
@@ -228,8 +219,20 @@ function jumpFloorII($number)
  * @param $number int
  * @return int
  */
-function rectCover($number)
-{
-    //todo do it!!
-    return 0;
+function rectCover($number) {
+    //f(n) = f(n-1)+f(n-2)
+
+    if ($number <= 0) {
+        return 0;
+    } elseif ($number == 1 || $number == 2) {
+        return $number;
+    } else{
+        $f1=1;$f2=2;$result = 0;
+        for ($i = 3;$i<=$number;$i++){
+            $result = $f1+$f2;
+            $f1 = $f2;
+            $f2 = $result;
+        }
+        return $result;
+    }
 }

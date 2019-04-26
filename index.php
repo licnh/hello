@@ -13,7 +13,8 @@ $start_time = microtime();
 //$res = minNumberInRotateArray([5, 6, 7, 1, 2, 3, 4,]);
 //$res = Fibonacci(9);
 //$res = jumpFloor(9);
-$res = jumpFloorII(0);
+//$res = jumpFloorII(0);
+$res = rectCover(5);
 
 
 $end_time = microtime();
