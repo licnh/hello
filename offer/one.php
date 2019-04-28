@@ -254,3 +254,18 @@ function NumberOf1($n) {
     }
     return $count;
 }
+
+/**
+ * 数值的整数次方
+ * 给定一个double类型的浮点数base和int类型的整数exponent。求base的exponent次方。
+ * @param $base double
+ * @param $exponent int
+ * @return double
+ */
+function Power($base, $exponent) {
+    return pow($base, $exponent);
+
+    //todo：快速幂
+    if (!$base) return 0;
+    if (!$exponent) return 1;
+}

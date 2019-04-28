@@ -15,8 +15,8 @@ $start_time = microtime();
 //$res = jumpFloor(9);
 //$res = jumpFloorII(0);
 //$res = rectCover(5);
-$res = NumberOf1(-27483648);
-
+//$res = NumberOf1(-27483648);
+$res = Power(1,0);
 
 $end_time = microtime();
 
