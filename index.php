@@ -14,7 +14,8 @@ $start_time = microtime();
 //$res = Fibonacci(9);
 //$res = jumpFloor(9);
 //$res = jumpFloorII(0);
-$res = rectCover(5);
+//$res = rectCover(5);
+$res = NumberOf1(-27483648);
 
 
 $end_time = microtime();

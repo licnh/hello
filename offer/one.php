@@ -226,10 +226,12 @@ function rectCover($number) {
         return 0;
     } elseif ($number == 1 || $number == 2) {
         return $number;
-    } else{
-        $f1=1;$f2=2;$result = 0;
-        for ($i = 3;$i<=$number;$i++){
-            $result = $f1+$f2;
+    } else {
+        $f1 = 1;
+        $f2 = 2;
+        $result = 0;
+        for ($i = 3; $i <= $number; $i++) {
+            $result = $f1 + $f2;
             $f1 = $f2;
             $f2 = $result;
         }
@@ -243,8 +245,12 @@ function rectCover($number) {
  * @param $n
  * @return int
  */
-function NumberOf1($n)
-{
-    //todo 看妇联4去辣
-    return 0;
+function NumberOf1($n) {
+    $count = 0;
+    $n = $n & 0xffffffff;
+    while ($n) {
+        $count++;
+        $n = ($n - 1) & $n;
+    }
+    return $count;
 }
