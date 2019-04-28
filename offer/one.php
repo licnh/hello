@@ -263,9 +263,20 @@ function NumberOf1($n) {
  * @return double
  */
 function Power($base, $exponent) {
-    return pow($base, $exponent);
-
-    //todo：快速幂
     if (!$base) return 0;
-    if (!$exponent) return 1;
+    if ($base==1||$exponent==1) return $base;
+    $result = 1;//0直接返回1
+    $is_f = false;
+    if($exponent<0){
+        $is_f = true;//负数求倒数
+        $exponent = -$exponent;
+    }
+    while ($exponent){
+        if($exponent & 1){//&1 判断最后一位是否为1
+            $result *= $base;
+        }
+        $base *= $base;
+        $exponent >>= 1;
+    }
+    return $is_f?1/$result:$result;
 }
