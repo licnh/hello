@@ -264,19 +264,68 @@ function NumberOf1($n) {
  */
 function Power($base, $exponent) {
     if (!$base) return 0;
-    if ($base==1||$exponent==1) return $base;
+    if ($base == 1 || $exponent == 1) return $base;
     $result = 1;//0直接返回1
     $is_f = false;
-    if($exponent<0){
+    if ($exponent < 0) {
         $is_f = true;//负数求倒数
         $exponent = -$exponent;
     }
-    while ($exponent){
-        if($exponent & 1){//&1 判断最后一位是否为1
+    while ($exponent) {
+        if ($exponent & 1) {//&1 判断最后一位是否为1
             $result *= $base;
         }
         $base *= $base;
         $exponent >>= 1;
     }
-    return $is_f?1/$result:$result;
+    return $is_f ? 1 / $result : $result;
+}
+
+/**
+ * 调整数组顺序使奇数位于偶数前面
+ * 输入一个整数数组，实现一个函数来调整该数组中数字的顺序，
+ * 使得所有的奇数位于数组的前半部分，所有的偶数位于数组的后半部分，并保证奇数和奇数，偶数和偶数之间的相对位置不变。
+ * @param $array
+ * @return array
+ */
+function reOrderArray($array) {
+
+    $res = [[], []];
+    foreach ($array as $one) {
+        if ($one & 1) {
+            //奇数
+            $res[0][] = $one;
+        } else {
+            $res[1][] = $one;
+        }
+    }
+    return array_merge($res[0], $res[1]);
+}
+
+
+/**
+ * 链表中倒数第k个结点
+ * @param $head ListNode
+ * @param $k int
+ * @return ListNode|false
+ */
+function FindKthToTail($head, $k) {
+    if ($k <= 0) {
+        return false;
+    }
+    $end = $head;
+    $kNode = null;
+    while ($end) {
+        if ($k > 0) {
+            $k--;
+        }
+        if ($k == 0) {
+            $kNode = $kNode ? $kNode->next : $head;
+        }
+        $end = $end->next;
+    }
+    if ($k > 0) {
+        return false;
+    }
+    return $kNode;
 }

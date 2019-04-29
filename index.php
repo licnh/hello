@@ -16,7 +16,8 @@ $start_time = microtime();
 //$res = jumpFloorII(0);
 //$res = rectCover(5);
 //$res = NumberOf1(-27483648);
-$res = Power(2,-4);
+//$res = Power(2,-4);
+$res = reOrderArray([5, 6, 7, 1, 2, 3, 4,]);
 
 $end_time = microtime();
 
