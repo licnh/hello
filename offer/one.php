@@ -329,3 +329,25 @@ function FindKthToTail($head, $k) {
     }
     return $kNode;
 }
+
+/**
+ * 反转链表
+ * 输入一个链表，反转链表后，输出新链表的表头。
+ * @param $pHead ListNode
+ * @return ListNode
+ */
+function ReverseList($pHead) {
+    $last = null;
+    while ($pHead){
+        $tmp = $pHead->next;
+        $pHead->next = $last;
+        $last = $pHead;
+
+        if($tmp){
+            $pHead = $tmp;
+        }else{
+            break;
+        }
+    }
+    return $pHead;
+}
