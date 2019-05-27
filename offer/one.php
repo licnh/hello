@@ -408,8 +408,8 @@ function HasSubtree($root1, $root2) {
     $find = [];
     $is_find = findValFromTree($root1, $root2->val, $find);
     if ($is_find && count($find) > 0) {
-        foreach ($find as $node){
-            if(checkSubTree($node,$root2)){
+        foreach ($find as $node) {
+            if (checkSubTree($node, $root2)) {
                 return true;
             }
         }
@@ -446,22 +446,22 @@ function findValFromTree($root, $val, &$find) {
  * @param $root2 TreeNode
  * @return bool
  */
-function checkSubTree($root1,$root2){
+function checkSubTree($root1, $root2) {
     $flag = true;
-    if(!$root1&&!$root2){
+    if (!$root1 && !$root2) {
         return true;
     }
-    if((!$root1&&$root2) || ($root1&&!$root2)){
+    if ((!$root1 && $root2) || ($root1 && !$root2)) {
         return false;
     }
-    if($root1->val != $root2->val){
+    if ($root1->val != $root2->val) {
         return false;
     }
-    if($root2->left){
-        $flag = checkSubTree($root1->left,$root2->left);
+    if ($root2->left) {
+        $flag = checkSubTree($root1->left, $root2->left);
     }
-    if($flag && $root2->right){
-        $flag = checkSubTree($root1->right,$root2->right);
+    if ($flag && $root2->right) {
+        $flag = checkSubTree($root1->right, $root2->right);
     }
     return $flag;
 }
@@ -470,21 +470,28 @@ function checkSubTree($root1,$root2){
  * 二叉树的镜像
  * @param $root TreeNode
  */
-function Mirror(&$root)
-{
-    if(!$root){
+function Mirror(&$root) {
+    if (!$root) {
         return;
     }
-    if($root->left || $root->right){
+    if ($root->left || $root->right) {
         $tmp = $root->left;
         $root->left = $root->right;
         $root->right = $tmp;
         unset($tmp);
     }
-    if($root->left){
+    if ($root->left) {
         Mirror($root->left);
     }
-    if($root->right){
+    if ($root->right) {
         Mirror($root->right);
     }
+}
+
+/**
+ * 打印矩阵， 按顺时针打印二维数组
+ * @param $matrix
+ */
+function printMatrix($matrix) {
+    // write code here
 }
