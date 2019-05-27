@@ -338,14 +338,14 @@ function FindKthToTail($head, $k) {
  */
 function ReverseList($pHead) {
     $last = null;
-    while ($pHead){
+    while ($pHead) {
         $tmp = $pHead->next;
         $pHead->next = $last;
         $last = $pHead;
 
-        if($tmp){
+        if ($tmp) {
             $pHead = $tmp;
-        }else{
+        } else {
             break;
         }
     }
@@ -359,37 +359,109 @@ function ReverseList($pHead) {
  * @param $pHead2 ListNode
  * @return ListNode
  */
-function Merge($pHead1, $pHead2)
-{
-    if(!$pHead1){
-        return $pHead2 ? : null;
+function Merge($pHead1, $pHead2) {
+    if (!$pHead1) {
+        return $pHead2 ?: null;
     }
-    if(!$pHead2){
-        return $pHead1 ? : null;
+    if (!$pHead2) {
+        return $pHead1 ?: null;
     }
 
-    if($pHead1->val<=$pHead2->val){
+    if ($pHead1->val <= $pHead2->val) {
         $head = $bef = $pHead1;
         $pHead1 = $pHead1->next;
-    }else{
+    } else {
         $head = $bef = $pHead2;
         $pHead2 = $pHead2->next;
     }
-    while($pHead1 && $pHead2){
-        if($pHead1->val<=$pHead2->val){
+    while ($pHead1 && $pHead2) {
+        if ($pHead1->val <= $pHead2->val) {
             $bef->next = $pHead1;
             $bef = $pHead1;
             $pHead1 = $pHead1->next;
-        }else{
+        } else {
             $bef->next = $pHead2;
             $bef = $pHead2;
             $pHead2 = $pHead2->next;
         }
     }
-    if($pHead1){
+    if ($pHead1) {
         $bef->next = $pHead1;
-    }elseif($pHead2){
+    } elseif ($pHead2) {
         $bef->next = $pHead2;
     }
     return $head;
+}
+
+
+/**
+ * 树的子结构
+ * 输入两棵二叉树A，B，判断B是不是A的子结构。空树不是任意一个树的子结构。
+ * @param $root1 TreeNode
+ * @param $root2 TreeNode
+ * @return bool
+ */
+function HasSubtree($root1, $root2) {
+    if (!$root1 || !$root2) {
+        return false;
+    }
+    $find = [];
+    $is_find = findValFromTree($root1, $root2->val, $find);
+    if ($is_find && count($find) > 0) {
+        foreach ($find as $node){
+            if(checkSubTree($node,$root2)){
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+/**
+ * 二叉树查找
+ * @param $root TreeNode 待查找的树
+ * @param $val mixed 要查找的值
+ * @param $find array 查找到的结果
+ * @return bool
+ */
+function findValFromTree($root, $val, &$find) {
+    if (!$root) {
+        return false;
+    }
+    if ($root->val == $val) {
+        $find[] = $root;
+    }
+    if ($root->left) {
+        findValFromTree($root->left, $val, $find);
+    }
+    if ($root->right) {
+        findValFromTree($root->right, $val, $find);
+    }
+    return true;
+}
+
+/**
+ * 检查树1包含树2
+ * @param $root1 TreeNode
+ * @param $root2 TreeNode
+ * @return bool
+ */
+function checkSubTree($root1,$root2){
+    $flag = true;
+    if(!$root1&&!$root2){
+        return true;
+    }
+    if((!$root1&&$root2) || ($root1&&!$root2)){
+        return false;
+    }
+    if($root1->val != $root2->val){
+        return false;
+    }
+    if($root2->left){
+        $flag = checkSubTree($root1->left,$root2->left);
+    }
+    if($flag && $root2->right){
+        $flag = checkSubTree($root1->right,$root2->right);
+    }
+    return $flag;
 }
