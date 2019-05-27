@@ -465,3 +465,26 @@ function checkSubTree($root1,$root2){
     }
     return $flag;
 }
+
+/**
+ * 二叉树的镜像
+ * @param $root TreeNode
+ */
+function Mirror(&$root)
+{
+    if(!$root){
+        return;
+    }
+    if($root->left || $root->right){
+        $tmp = $root->left;
+        $root->left = $root->right;
+        $root->right = $tmp;
+        unset($tmp);
+    }
+    if($root->left){
+        Mirror($root->left);
+    }
+    if($root->right){
+        Mirror($root->right);
+    }
+}
