@@ -490,8 +490,62 @@ function Mirror(&$root) {
 
 /**
  * 打印矩阵， 按顺时针打印二维数组
- * @param $matrix
+ * @param $matrix array
+ * @return array
  */
 function printMatrix($matrix) {
-    // write code here
+    if (!$matrix) {
+        return null;
+    }
+    if (!is_array($matrix) || !is_array($matrix[0])) {
+        return null;
+    }
+    $x = $y = 0;
+    $printed_y = [-1, count($matrix)];
+    $printed_x = [-1, count($matrix[0])];
+    $count_all = count($matrix) * count($matrix[0]);
+    $new_arr = [$matrix[0][0]];
+    $direction = 0;
+    while (count($new_arr) < $count_all) {
+        switch ($direction % 4) {
+            case 0://往右
+                if (count($matrix[0]) == 1) {
+                    $printed_y[0]++;
+                    $direction++;
+                    break;
+                }
+                $x++;
+                if ($x == $printed_x[1] - 1) {
+                    $printed_y[0]++;
+                    $direction++;
+                }
+                $new_arr[] = $matrix[$y][$x];
+                break;
+            case 1://往下
+                $y++;
+                if ($y == $printed_y[1] - 1) {
+                    $printed_x[1]--;
+                    $direction++;
+                }
+                $new_arr[] = $matrix[$y][$x];
+                break;
+            case 2://往左
+                $x--;
+                if ($x == $printed_x[0] + 1) {
+                    $printed_y[1]--;
+                    $direction++;
+                }
+                $new_arr[] = $matrix[$y][$x];
+                break;
+            case 3://往上
+                $y--;
+                if ($y == $printed_y[0] + 1) {
+                    $printed_x[0]++;
+                    $direction++;
+                }
+                $new_arr[] = $matrix[$y][$x];
+                break;
+        }
+    }
+    return $new_arr;
 }
