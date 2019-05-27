@@ -351,3 +351,45 @@ function ReverseList($pHead) {
     }
     return $pHead;
 }
+
+/**
+ * 合并两个排序的链表
+ * 输入两个单调递增的链表，输出两个链表合成后的链表，合成后的链表满足单调不减规则。
+ * @param $pHead1 ListNode
+ * @param $pHead2 ListNode
+ * @return ListNode
+ */
+function Merge($pHead1, $pHead2)
+{
+    if(!$pHead1){
+        return $pHead2 ? : null;
+    }
+    if(!$pHead2){
+        return $pHead1 ? : null;
+    }
+
+    if($pHead1->val<=$pHead2->val){
+        $head = $bef = $pHead1;
+        $pHead1 = $pHead1->next;
+    }else{
+        $head = $bef = $pHead2;
+        $pHead2 = $pHead2->next;
+    }
+    while($pHead1 && $pHead2){
+        if($pHead1->val<=$pHead2->val){
+            $bef->next = $pHead1;
+            $bef = $pHead1;
+            $pHead1 = $pHead1->next;
+        }else{
+            $bef->next = $pHead2;
+            $bef = $pHead2;
+            $pHead2 = $pHead2->next;
+        }
+    }
+    if($pHead1){
+        $bef->next = $pHead1;
+    }elseif($pHead2){
+        $bef->next = $pHead2;
+    }
+    return $head;
+}
