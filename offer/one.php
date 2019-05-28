@@ -599,8 +599,7 @@ function PrintFromTopToBottom($root) {
     while ($current_queue) {
         $next_queue = [];
         foreach ($current_queue as $one) {
-            if(!$one)
-                continue;
+            if (!$one) continue;
             $tree[] = $one->val;
             if ($one->left) {
                 $next_queue[] = $one->left;
@@ -613,4 +612,28 @@ function PrintFromTopToBottom($root) {
         $current_queue = $next_queue;
     }
     return $tree;
+}
+
+/**
+ * 二叉搜索树的后序遍历序列
+ * 输入一个整数数组，判断该数组是不是某二叉搜索树的后序遍历的结果。假设输入的数组的任意两个数字都互不相同。
+ *
+ * 二叉搜索树（Binary Search Tree），也称二叉搜索树，是指一棵空树或者具有下列性质的二叉树：
+ *  1.任意节点的左子树不空，则左子树上所有结点的值均小于它的根结点的值；
+ *  2.任意节点的右子树不空，则右子树上所有结点的值均大于它的根结点的值；
+ *  3.任意节点的左、右子树也分别为二叉查找树；
+ *  4.没有键值相等的节点。
+ * @param $sequence array
+ * @return bool
+ */
+function VerifySquenceOfBST($sequence) {
+    if (!$sequence) return false;
+    while (count($sequence) > 2) {
+        $root = array_pop($sequence);
+        $idx = count($sequence) - 1;
+        while ($idx >= 0 && $sequence[$idx] > $root) $idx--;
+        while ($idx >= 0 && $sequence[$idx] < $root) $idx--;
+        if ($idx != -1) return false;
+    }
+    return true;
 }
