@@ -509,7 +509,7 @@ function printMatrix($matrix) {
     while (count($new_arr) < $count_all) {
         switch ($direction % 4) {
             case 0://往右
-                if (count($matrix[0]) == 1) {
+                if (count($matrix[0]) == 1) {//单列的时候 直接往下走
                     $printed_y[0]++;
                     $direction++;
                     break;
@@ -548,4 +548,37 @@ function printMatrix($matrix) {
         }
     }
     return $new_arr;
+}
+
+
+/**
+ * 栈的压入、弹出序列
+ * 输入两个整数序列，第一个序列表示栈的压入顺序，请判断第二个序列是否可能为该栈的弹出顺序。
+ * 假设压入栈的所有数字均不相等。
+ * 例如序列1,2,3,4,5是某栈的压入顺序，序列4,5,3,2,1是该压栈序列对应的一个弹出序列，但4,3,5,1,2就不可能是该压栈序列的弹出序列。
+ * （注意：这两个序列的长度是相等的）
+ * @param $push_arr array
+ * @param $pop_arr  array
+ * @return bool
+ */
+function IsPopOrder($push_arr, $pop_arr) {
+    if (!is_array($push_arr) || !is_array($pop_arr) || (count($push_arr) != count($pop_arr))) {
+        return false;
+    }
+    $stack = [];
+    while ($push_arr) {
+        $one = array_shift($push_arr);
+        if ($one == $pop_arr[0]) {
+            array_shift($pop_arr);
+        } else {
+            $stack[] = $one;
+        }
+    }
+    unset($one);
+    foreach ($stack as $one) {
+        if ($one != array_pop($pop_arr)) {
+            return false;
+        }
+    }
+    return true;
 }

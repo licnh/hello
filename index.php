@@ -19,7 +19,8 @@ $start_time = microtime();
 //$res = Power(2,-4);
 //$res = reOrderArray([5, 6, 7, 1, 2, 3, 4,]);
 //$res = Merge(new ListNode());
-$res = printMatrix([[1,2,3,4],[5,6,7,8],[9,10,11,12]]);
+//$res = printMatrix([[1,2,3,4],[5,6,7,8],[9,10,11,12]]);
+$res = IsPopOrder([1,2,3,4,5],[4,3,5,2,1]);
 $end_time = microtime();
 
 //计算毫秒
