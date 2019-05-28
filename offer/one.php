@@ -582,3 +582,35 @@ function IsPopOrder($push_arr, $pop_arr) {
     }
     return true;
 }
+
+
+/**
+ * 从上往下打印二叉树
+ * 从上往下打印出二叉树的每个节点，同层节点从左至右打印。
+ * @param $root TreeNode
+ * @return array
+ */
+function PrintFromTopToBottom($root) {
+    if (empty($root)) {
+        return [];
+    }
+    $tree = $current_queue = [];
+    $current_queue[] = $root;//当前层级的队列，第一层只有root
+    while ($current_queue) {
+        $next_queue = [];
+        foreach ($current_queue as $one) {
+            if(!$one)
+                continue;
+            $tree[] = $one->val;
+            if ($one->left) {
+                $next_queue[] = $one->left;
+            }
+            if ($one->right) {
+                $next_queue[] = $one->right;
+            }
+        }
+        unset($one);
+        $current_queue = $next_queue;
+    }
+    return $tree;
+}
