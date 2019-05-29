@@ -691,11 +691,11 @@ function getAllPath($root, &$path_all_val, &$path_val = []) {
 function MyClone($list_head) {
     if (!$list_head) return null;
     $old_arr = $cloned_arr = [];
-    $new_list = cloneList($list_head,$old_arr,$cloned_arr);
-    foreach ($old_arr as $idx=>$old){
-        if($old->random){
-            $random_idx = array_search($old->random,$old_arr);
-            if($random_idx!==false){
+    $new_list = cloneList($list_head, $old_arr, $cloned_arr);
+    foreach ($old_arr as $idx => $old) {
+        if ($old->random) {
+            $random_idx = array_search($old->random, $old_arr);
+            if ($random_idx !== false) {
                 $cloned_arr[$idx]->random = $cloned_arr[$random_idx];
             }
         }
@@ -710,13 +710,25 @@ function MyClone($list_head) {
  * @param $cloned
  * @return RandomListNode|null
  */
-function cloneList($list_head,&$old,&$cloned){
+function cloneList($list_head, &$old, &$cloned) {
     if (!$list_head) return null;
     $new_node = new RandomListNode($list_head->label);
     $old[] = $list_head;
     $cloned[] = $new_node;
     if ($list_head->next) {
-        $new_node->next = cloneList($list_head->next,$old,$cloned);
+        $new_node->next = cloneList($list_head->next, $old, $cloned);
     }
     return $new_node;
 }
+
+/**
+ * 二叉搜索树转有序双向链表
+ * 输入一棵二叉搜索树(BST)，将该二叉搜索树转换成一个排序的双向链表。要求不能创建任何新的结点，只能调整树中结点指针的指向。
+ * @param $root TreeNode
+ * @return TreeNode
+ */
+function Convert($root) {
+    if (!$root) return null;
+    //todo
+}
+
