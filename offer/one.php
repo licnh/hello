@@ -648,8 +648,8 @@ function VerifySquenceOfBST($sequence) {
  * @return array
  */
 function FindPath($root, $sum_val) {
-    if (!$root) return null;
-    if (!is_int($sum_val) && !is_float($sum_val)) return null;
+    if (!$root) return [];
+    if (!is_int($sum_val) && !is_float($sum_val)) return [];
     $path_all = [];//所有路径
     getAllPath($root, $path_all, $path_all_val);
 
