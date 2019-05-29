@@ -654,11 +654,11 @@ function FindPath($root, $sum_val) {
     getAllPath($root, $path_all, $path_all_val);
 
     $path_yes = [];
-    foreach ($path_all as $path){
-        if(array_sum($path)==$sum_val) $path_yes[] = $path;
+    foreach ($path_all as $path) {
+        if (array_sum($path) == $sum_val) $path_yes[] = $path;
     }
-    uasort($path_yes,function ($a,$b){
-        return count($a)>count($b)?-1:1;
+    uasort($path_yes, function ($a, $b) {
+        return count($a) > count($b) ? -1 : 1;
     });
     return $path_yes;
 }
@@ -672,11 +672,51 @@ function FindPath($root, $sum_val) {
 function getAllPath($root, &$path_all_val, &$path_val = []) {
     $path_val[] = $root->val;
     if ($root->left || $root->right) {
-        if ($root->left) getAllPath($root->left, $path_all_val,  $path_val);
+        if ($root->left) getAllPath($root->left, $path_all_val, $path_val);
         if ($root->right) getAllPath($root->right, $path_all_val, $path_val);
     } else {
         $path_all_val[] = $path_val;
     }
     //移除已通过的节点
     array_pop($path_val);
+}
+
+/**
+ * 复杂链表的复制
+ * 输入一个复杂链表（每个节点中有节点值，以及两个指针，一个指向下一个节点，另一个特殊指针指向任意一个节点），
+ * 返回结果为复制后复杂链表的头。（注意，输出结果中请不要返回参数中的节点引用）
+ * @param $list_head RandomListNode
+ * @return RandomListNode
+ */
+function MyClone($list_head) {
+    if (!$list_head) return null;
+    $old_arr = $cloned_arr = [];
+    $new_list = cloneList($list_head,$old_arr,$cloned_arr);
+    foreach ($old_arr as $idx=>$old){
+        if($old->random){
+            $random_idx = array_search($old->random,$old_arr);
+            if($random_idx!==false){
+                $cloned_arr[$idx]->random = $cloned_arr[$random_idx];
+            }
+        }
+
+    }
+    return $new_list;
+}
+
+/**
+ * @param $list_head
+ * @param $old
+ * @param $cloned
+ * @return RandomListNode|null
+ */
+function cloneList($list_head,&$old,&$cloned){
+    if (!$list_head) return null;
+    $new_node = new RandomListNode($list_head->label);
+    $old[] = $list_head;
+    $cloned[] = $new_node;
+    if ($list_head->next) {
+        $new_node->next = cloneList($list_head->next,$old,$cloned);
+    }
+    return $new_node;
 }

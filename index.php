@@ -4,24 +4,6 @@ require_once "./offer/one.php";
 echo "start:" . PHP_EOL;
 $res = null;
 
-//创建二叉树
-$n3 = new TreeNode(3);
-$n4 = new TreeNode(4);
-$n5 = new TreeNode(5);
-$n6 = new TreeNode(6);
-$n7 = new TreeNode(7);
-$n8 = new TreeNode(8);
-$n9 = new TreeNode(9);
-$n10 = new TreeNode(-1);
-$n3->left   = $n4;
-$n4->left   = $n6;
-$n6->right  = $n9;
-$n3->right  = $n5;
-$n5->left   = $n7;
-$n5->right  = $n8;
-$n8->left = $n10;
-
-
 $start_time = microtime();
 
 //$res = findMe(15, [[1, 2, 8, 9], [2, 4, 9, 12], [4, 7, 10, 13], [6, 8, 11, 15]]);
@@ -40,7 +22,8 @@ $start_time = microtime();
 //$res = printMatrix([[1,2,3,4],[5,6,7,8],[9,10,11,12]]);
 //$res = IsPopOrder([1,2,3,4,5],[4,3,5,2,1]);
 //$res = VerifySquenceOfBST([3,1,2,6,7,9,8,4]);
-$res = FindPath($n3,15);
+//$res = FindPath($n3,15);
+$res = MyClone($random_node1);
 $end_time = microtime();
 
 //计算毫秒
