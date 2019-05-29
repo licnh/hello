@@ -618,7 +618,7 @@ function PrintFromTopToBottom($root) {
  * 二叉搜索树的后序遍历序列
  * 输入一个整数数组，判断该数组是不是某二叉搜索树的后序遍历的结果。假设输入的数组的任意两个数字都互不相同。
  *
- * 二叉搜索树（Binary Search Tree），也称二叉搜索树，是指一棵空树或者具有下列性质的二叉树：
+ * 二叉搜索树（Binary Search Tree），也称二叉搜索树，是指一棵空树或者具有下列性质的二叉树：（此题空值要求返回false）
  *  1.任意节点的左子树不空，则左子树上所有结点的值均小于它的根结点的值；
  *  2.任意节点的右子树不空，则右子树上所有结点的值均大于它的根结点的值；
  *  3.任意节点的左、右子树也分别为二叉查找树；
@@ -636,4 +636,47 @@ function VerifySquenceOfBST($sequence) {
         if ($idx != -1) return false;
     }
     return true;
+}
+
+/**
+ * 二叉树中和为某一值的路径
+ * 输入一颗二叉树的跟节点和一个整数，打印出二叉树中结点值的和为输入整数的所有路径。
+ * 路径定义为从树的根结点开始往下一直到叶结点所经过的结点形成一条路径。
+ * (注意: 在返回值的list中，数组长度大的数组靠前)
+ * @param $root TreeNode
+ * @param $sum_val int
+ * @return array
+ */
+function FindPath($root, $sum_val) {
+    if (!$root) return null;
+    if (!is_int($sum_val) && !is_float($sum_val)) return null;
+    $path_all = [];//所有路径
+    getAllPath($root, $path_all, $path_all_val);
+
+    $path_yes = [];
+    foreach ($path_all as $path){
+        if(array_sum($path)==$sum_val) $path_yes[] = $path;
+    }
+    uasort($path_yes,function ($a,$b){
+        return count($a)>count($b)?-1:1;
+    });
+    return $path_yes;
+}
+
+/**
+ * 获取二叉树的所有路径
+ * @param $root TreeNode
+ * @param $path_val
+ * @param $path_all_val
+ */
+function getAllPath($root, &$path_all_val, &$path_val = []) {
+    $path_val[] = $root->val;
+    if ($root->left || $root->right) {
+        if ($root->left) getAllPath($root->left, $path_all_val,  $path_val);
+        if ($root->right) getAllPath($root->right, $path_all_val, $path_val);
+    } else {
+        $path_all_val[] = $path_val;
+    }
+    //移除已通过的节点
+    array_pop($path_val);
 }
