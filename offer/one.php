@@ -26,7 +26,7 @@ function findMe($target, $array) {
             //if(in_array($target,$row)){
             //    return true;
             //}
-            //对每行使用二分查找,能比in_array高率
+            //对每行使用二分查找
             $l = 0;
             $r = $count_x - 1;
             while ($l <= $r) {
@@ -752,4 +752,32 @@ function Convert($root, &$start = null, &$end = null) {
         $end = $root;
     }
     return $start;
+}
+
+/**
+ * 字符串的排列
+ * 输入一个字符串,长度不超过9,按字典序打印出该字符串中字符的所有排列。
+ * 例如输入字符串abc,则打印出由字符a,b,c所能排列出来的所有字符串abc,acb,bac,bca,cab和cba。
+ * @param $str string
+ * @return array
+ */
+function Permutation($str) {
+    if(strlen($str)>9 || (empty($str) && $str!='0')) return [];
+    //只有一个字符 直接返回
+    if(strlen($str)==1) return [$str];
+
+    $result = [];
+    /**
+     * todo：gogogo
+     * 思路:
+     * F(1): 一个字符 只有一种组合
+     * F(2): 两个字符 第二个字符可以放在第一个的前、后 两种
+     * F(3): 三个字符 第三个字符可以放在前两个字符的前、后或中间 3*F(2)
+     * F(4): 四个字符 第四个字符可以放在前三个字符的前、后或任意一个两个字符中间 4*F(3 )
+     * F(n): (2+(n-1))*F(n)
+     */
+
+
+
+    return $result;
 }

@@ -24,8 +24,8 @@ $start_time = microtime();
 //$res = VerifySquenceOfBST([3,1,2,6,7,9,8,4]);
 //$res = FindPath($n3,15);
 //$res = MyClone($random_node1);
-$start = $end = null;
-$res = Convert($n5,$start,$end);
+//$res = Convert($n5,$start,$end);
+$res = Permutation('aba');
 $end_time = microtime();
 
 //计算毫秒
