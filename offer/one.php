@@ -731,23 +731,23 @@ function cloneList($list_head, &$old, &$cloned) {
  */
 function Convert($root, &$start = null, &$end = null) {
     if (!$root) return null;
+    $tmp_start = null;
+    $tmp_end = null;
     if ($root->left) {
-        $left_start = null;
-        $left_end = null;
-        Convert($root->left, $left_start, $left_end);
-        $start = $left_start;
-        $root->left = $left_end;
-        $left_end->right = $root;
+        Convert($root->left, $tmp_start, $tmp_end);
+        $start = $tmp_start;
+        $root->left = $tmp_end;
+        $tmp_end->right = $root;
     } else {
         $start = $root;
     }
     if ($root->right) {
         $right_start = null;
         $right_end = null;
-        Convert($root->right, $right_start, $right_end);
-        $end = $right_end;
-        $root->right = $right_start;
-        $right_start->left = $root;
+        Convert($root->right, $tmp_start, $tmp_end);
+        $end = $tmp_end;
+        $root->right = $tmp_start;
+        $tmp_start->left = $root;
     } else {
         $end = $root;
     }
