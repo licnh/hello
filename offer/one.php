@@ -751,5 +751,5 @@ function Convert($root, &$start = null, &$end = null) {
     } else {
         $end = $root;
     }
-    return $start ?: $root;
+    return $start;
 }
