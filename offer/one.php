@@ -725,10 +725,31 @@ function cloneList($list_head, &$old, &$cloned) {
  * 二叉搜索树转有序双向链表
  * 输入一棵二叉搜索树(BST)，将该二叉搜索树转换成一个排序的双向链表。要求不能创建任何新的结点，只能调整树中结点指针的指向。
  * @param $root TreeNode
+ * @param $start TreeNode
+ * @param $end TreeNode
  * @return TreeNode
  */
-function Convert($root) {
+function Convert($root, &$start = null, &$end = null) {
     if (!$root) return null;
-    //todo
+    if ($root->left) {
+        $left_start = null;
+        $left_end = null;
+        Convert($root->left, $left_start, $left_end);
+        $start = $left_start;
+        $root->left = $left_end;
+        $left_end->right = $root;
+    } else {
+        $start = $root;
+    }
+    if ($root->right) {
+        $right_start = null;
+        $right_end = null;
+        Convert($root->right, $right_start, $right_end);
+        $end = $right_end;
+        $root->right = $right_start;
+        $right_start->left = $root;
+    } else {
+        $end = $root;
+    }
+    return $start ?: $root;
 }
-

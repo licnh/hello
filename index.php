@@ -23,7 +23,9 @@ $start_time = microtime();
 //$res = IsPopOrder([1,2,3,4,5],[4,3,5,2,1]);
 //$res = VerifySquenceOfBST([3,1,2,6,7,9,8,4]);
 //$res = FindPath($n3,15);
-$res = MyClone($random_node1);
+//$res = MyClone($random_node1);
+$start = $end = null;
+$res = Convert($n5,$start,$end);
 $end_time = microtime();
 
 //计算毫秒

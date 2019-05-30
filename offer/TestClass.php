@@ -69,15 +69,15 @@ $n5 = new TreeNode(5);
 $n6 = new TreeNode(6);
 $n7 = new TreeNode(7);
 $n8 = new TreeNode(8);
-$n9 = new TreeNode(9);
-$n10 = new TreeNode(-1);
-$n3->left   = $n4;
-$n4->left   = $n6;
-$n6->right  = $n9;
-$n3->right  = $n5;
-$n5->left   = $n7;
-$n5->right  = $n8;
-$n8->left = $n10;
+//$n9 = new TreeNode(9);
+//$n10 = new TreeNode(-1);
+$n5->left   = $n3;
+$n5->right   = $n7;
+$n3->right  = $n4;
+$n7->left   = $n6;
+$n7->right   = $n8;
+//$n5->right  = $n8;
+//$n8->left = $n10;
 
 //创建一个复杂链表
 $random_node1 = new RandomListNode(1);
