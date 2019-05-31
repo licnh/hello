@@ -25,7 +25,7 @@ $start_time = microtime();
 //$res = FindPath($n3,15);
 //$res = MyClone($random_node1);
 //$res = Convert($n5,$start,$end);
-$res = Permutation('aba');
+$res = Permutation('abadc');
 $end_time = microtime();
 
 //计算毫秒

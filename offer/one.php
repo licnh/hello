@@ -762,22 +762,52 @@ function Convert($root, &$start = null, &$end = null) {
  * @return array
  */
 function Permutation($str) {
-    if(strlen($str)>9 || (empty($str) && $str!='0')) return [];
+    if (strlen($str) > 9 || (empty($str) && $str != '0')) return [];
     //只有一个字符 直接返回
-    if(strlen($str)==1) return [$str];
+    if (strlen($str) == 1) return [$str];
 
+    $str_arr = str_split($str);
     $result = [];
-    /**
-     * todo：gogogo
-     * 思路:
-     * F(1): 一个字符 只有一种组合
-     * F(2): 两个字符 第二个字符可以放在第一个的前、后 两种
-     * F(3): 三个字符 第三个字符可以放在前两个字符的前、后或中间 3*F(2)
-     * F(4): 四个字符 第四个字符可以放在前三个字符的前、后或任意一个两个字符中间 4*F(3 )
-     * F(n): (2+(n-1))*F(n)
-     */
-
-
-
+    for ($i = count($str_arr) - 1; $i >= 0; $i--) {
+        getStrArray($str_arr[$i], $result);
+    }
+    foreach ($result as &$one) {
+        $one = implode("", $one);
+    }
+    $result = array_keys(array_flip($result));
+    sort($result);
     return $result;
+}
+
+/**
+ * 思路:
+ * F(1): 一个字符 只有一种组合
+ * F(2): 两个字符 第二个字符可以放在第一个的前、后 两种
+ * F(3): 三个字符 第三个字符可以放在前两个字符的前、后或中间 3*F(2)
+ * F(4): 四个字符 第四个字符可以放在前三个字符的前、后或任意一个两个字符中间 4*F(3 )
+ * F(n): (2+(n-1))*F(n)
+ *
+ * @param $char
+ * @param $result array
+ * @return void
+ */
+function getStrArray($char, &$result) {
+
+    if (empty($result)) {
+        $result = [[$char]];
+        return;
+    }
+    $tmp = [];
+    foreach ($result as $row) {
+        for ($i = 0; $i < count($row); $i++) {
+            if ($char == $row[$i]) continue;
+            $row_copy = $row;
+            array_splice($row_copy, $i, 0, $char);
+            $tmp[] = $row_copy;
+        }
+        $row[] = $char;
+        $tmp[] = $row;
+    }
+    $result = $tmp;
+    return;
 }
