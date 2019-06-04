@@ -811,3 +811,29 @@ function getStrArray($char, &$result) {
     $result = $tmp;
     return;
 }
+
+/**
+ * 数组中出现次数超过一半的数字
+ * 找出数组中出现的次数超过数组长度的一半的数字。
+ * 例如输入一个长度为9的数组{1,2,3,2,2,2,5,4,2}。由于数字2在数组中出现了5次，超过数组长度的一半，因此输出2。
+ * 如果不存在则输出0
+ * @param $numbers array
+ * @return int
+ */
+function MoreThanHalfNum_Solution($numbers) {
+    if (!$numbers || !is_array($numbers)) return 0;
+    if (count($numbers) == 1) return $numbers[0];
+    $all_count = [];
+    foreach ($numbers as $num) {
+        if (isset($all_count[$num])) {
+            $all_count[$num]++;
+        } else {
+            $all_count[$num] = 1;
+        }
+    }
+    arsort($all_count);
+
+    if(current($all_count) > count($numbers)/2)
+        return key($all_count);
+    return 0;
+}
