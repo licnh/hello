@@ -26,7 +26,8 @@ $start_time = microtime();
 //$res = MyClone($random_node1);
 //$res = Convert($n5,$start,$end);
 //$res = Permutation('abadc');
-$res = MoreThanHalfNum_Solution([1,2,3,2,2,2,5,4,2]);
+//$res = MoreThanHalfNum_Solution([1,2,3,2,2,2,5,4,2]);
+$res = GetLeastNumbers_Solution([4,5,1,6,2,7,3,8],4);
 $end_time = microtime();
 
 //计算毫秒
