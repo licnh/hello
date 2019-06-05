@@ -846,14 +846,14 @@ function MoreThanHalfNum_Solution($numbers) {
  * @return array
  */
 function GetLeastNumbers_Solution($input, $k) {
-    if(empty($input)||!is_array($input)||!$k) return [];
+    if (empty($input) || !is_array($input) || !$k) return [];
     //构建容量为 K 的最小堆
     $heap = [];
-    foreach ($input as $value){
-        heapInsert($heap,$value);
+    foreach ($input as $value) {
+        heapInsert($heap, $value);
     }
     $res = [];
-    for($i=0;$i<$k;$i++){
+    for ($i = 0; $i < $k && $heap; $i++) {
         $res[] = heapShift($heap);
     }
     return $res;
@@ -864,21 +864,21 @@ function GetLeastNumbers_Solution($input, $k) {
  * @param $heap array
  * @param $val int
  */
-function heapInsert(&$heap, $val){
-    if(empty($heap)){//空堆初始化
+function heapInsert(&$heap, $val) {
+    if (empty($heap)) {//空堆初始化
         $heap = [$val];
         return;
     }
     //要插入的值放在堆最后一位
     $heap[] = $val;
     //和父节点比较 更小则交换 完成条件：成为跟节点或比父节点大
-    $i = count($heap)-1;//下标从0开始 i做为待插入节点的下标 其父节点下标是 (i-1)>>1
-    while($i>0){
-        $father = ($i-1)>>1;
-        if($heap[$father]>$heap[$i]){
+    $i = count($heap) - 1;//下标从0开始 i做为待插入节点的下标 其父节点下标是 (i-1)>>1
+    while ($i > 0) {
+        $father = ($i - 1) >> 1;
+        if ($heap[$father] > $heap[$i]) {
             $heap[$father] ^= $heap[$i] ^= $heap[$father] ^= $heap[$i];
             $i = $father;
-        }else{
+        } else {
             break;
         }
     }
@@ -889,25 +889,22 @@ function heapInsert(&$heap, $val){
  * @param $heap array
  * @return int
  */
-function heapShift(&$heap){
-    if(empty($heap)){
-        return null;
-    }
+function heapShift(&$heap) {
+    if (empty($heap)) return null;
+    if (count($heap) == 1) return array_pop($heap);
     $min = $heap[0];
     $heap[0] = array_pop($heap);
     //和子节点中小的那个比较, 大于则互换，直到小于子节点或不存在子节点
     $i = 0;//下标从0开始 i做为待插入节点的下标 其子节点下标是 (i+1)<<1-1,(i+1)<<1
-    while($i<count($heap)){
-        $son = ($i+1)<<1-1;
-        if(isset($heap[$son])){
-            if(isset($heap[$son+1])&&$heap[$son+1]<$heap[$son]) $son += 1;
-            if($heap[$son]<$heap[$i]){
+    while ($i < count($heap)) {
+        $son = ($i + 1) << 1 - 1;
+        if (isset($heap[$son])) {
+            if (isset($heap[$son + 1]) && $heap[$son + 1] < $heap[$son]) $son += 1;
+            if ($heap[$son] < $heap[$i]) {
                 $heap[$son] ^= $heap[$i] ^= $heap[$son] ^= $heap[$i];
                 $i = $son;
-            }
-        }else{
-            break;
-        }
+            } else break;
+        } else break;
     }
     return $min;
 }
