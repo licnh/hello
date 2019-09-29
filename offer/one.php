@@ -10,7 +10,8 @@ include_once "TestClass.php";
  * @param $array
  * @return bool
  */
-function findMe($target, $array) {
+function findMe($target, $array)
+{
     $count_x = null;
     if ($array && is_array($array)) {
         foreach ($array as $i => $row) {
@@ -57,7 +58,8 @@ function findMe($target, $array) {
  * @param $str
  * @return mixed
  */
-function replaceSpace($str) {
+function replaceSpace($str)
+{
 //    return str_replace(' ','%20',$str);
 //    return implode("%20",explode(" ",$str));
     $tmp = '';
@@ -79,7 +81,8 @@ function replaceSpace($str) {
  * @param $head ListNode
  * @return array
  */
-function printListFromTailToHead($head) {
+function printListFromTailToHead($head)
+{
     $ar = [];
     while ($head) {
         array_unshift($ar, $head->val);
@@ -98,7 +101,8 @@ function printListFromTailToHead($head) {
  * @param $vin array 中序遍历结果
  * @return TreeNode 二叉树的根节点
  */
-function reConstructBinaryTree($pre, $vin) {
+function reConstructBinaryTree($pre, $vin)
+{
     if ($pre && $pre == $vin) {
         $tmp = $root = new TreeNode(null);
         foreach ($pre as $one) {
@@ -132,7 +136,8 @@ function reConstructBinaryTree($pre, $vin) {
  * @param $rotateArray
  * @return int
  */
-function minNumberInRotateArray($rotateArray) {
+function minNumberInRotateArray($rotateArray)
+{
     if (empty($rotateArray) || !is_array($rotateArray)) {
         return 0;
     }
@@ -164,7 +169,8 @@ function minNumberInRotateArray($rotateArray) {
  * @param $n
  * @return int
  */
-function Fibonacci($n) {
+function Fibonacci($n)
+{
     if ($n < 2) {
         return $n;
     }
@@ -184,7 +190,8 @@ function Fibonacci($n) {
  * @param $number
  * @return int
  */
-function jumpFloor($number) {
+function jumpFloor($number)
+{
     if ($number <= 0) {
         return 0;
     } elseif ($number <= 2) {
@@ -206,7 +213,8 @@ function jumpFloor($number) {
  * @param $number
  * @return int
  */
-function jumpFloorII($number) {
+function jumpFloorII($number)
+{
     if ($number <= 0) {
         return 0;
     }
@@ -219,7 +227,8 @@ function jumpFloorII($number) {
  * @param $number int
  * @return int
  */
-function rectCover($number) {
+function rectCover($number)
+{
     //f(n) = f(n-1)+f(n-2)
 
     if ($number <= 0) {
@@ -245,7 +254,8 @@ function rectCover($number) {
  * @param $n
  * @return int
  */
-function NumberOf1($n) {
+function NumberOf1($n)
+{
     $count = 0;
     $n = $n & 0xffffffff;
     while ($n) {
@@ -262,7 +272,8 @@ function NumberOf1($n) {
  * @param $exponent int
  * @return double
  */
-function Power($base, $exponent) {
+function Power($base, $exponent)
+{
     if (!$base) return 0;
     if ($base == 1 || $exponent == 1) return $base;
     $result = 1;//0直接返回1
@@ -288,7 +299,8 @@ function Power($base, $exponent) {
  * @param $array
  * @return array
  */
-function reOrderArray($array) {
+function reOrderArray($array)
+{
 
     $res = [[], []];
     foreach ($array as $one) {
@@ -309,7 +321,8 @@ function reOrderArray($array) {
  * @param $k int
  * @return ListNode|false
  */
-function FindKthToTail($head, $k) {
+function FindKthToTail($head, $k)
+{
     if ($k <= 0) {
         return false;
     }
@@ -336,7 +349,8 @@ function FindKthToTail($head, $k) {
  * @param $pHead ListNode
  * @return ListNode
  */
-function ReverseList($pHead) {
+function ReverseList($pHead)
+{
     $last = null;
     while ($pHead) {
         $tmp = $pHead->next;
@@ -359,7 +373,8 @@ function ReverseList($pHead) {
  * @param $pHead2 ListNode
  * @return ListNode
  */
-function Merge($pHead1, $pHead2) {
+function Merge($pHead1, $pHead2)
+{
     if (!$pHead1) {
         return $pHead2 ?: null;
     }
@@ -401,7 +416,8 @@ function Merge($pHead1, $pHead2) {
  * @param $root2 TreeNode
  * @return bool
  */
-function HasSubtree($root1, $root2) {
+function HasSubtree($root1, $root2)
+{
     if (!$root1 || !$root2) {
         return false;
     }
@@ -424,7 +440,8 @@ function HasSubtree($root1, $root2) {
  * @param $find array 查找到的结果
  * @return bool
  */
-function findValFromTree($root, $val, &$find) {
+function findValFromTree($root, $val, &$find)
+{
     if (!$root) {
         return false;
     }
@@ -446,7 +463,8 @@ function findValFromTree($root, $val, &$find) {
  * @param $root2 TreeNode
  * @return bool
  */
-function checkSubTree($root1, $root2) {
+function checkSubTree($root1, $root2)
+{
     $flag = true;
     if (!$root1 && !$root2) {
         return true;
@@ -470,7 +488,8 @@ function checkSubTree($root1, $root2) {
  * 二叉树的镜像
  * @param $root TreeNode
  */
-function Mirror(&$root) {
+function Mirror(&$root)
+{
     if (!$root) {
         return;
     }
@@ -493,7 +512,8 @@ function Mirror(&$root) {
  * @param $matrix array
  * @return array
  */
-function printMatrix($matrix) {
+function printMatrix($matrix)
+{
     if (!$matrix) {
         return null;
     }
@@ -561,7 +581,8 @@ function printMatrix($matrix) {
  * @param $pop_arr  array
  * @return bool
  */
-function IsPopOrder($push_arr, $pop_arr) {
+function IsPopOrder($push_arr, $pop_arr)
+{
     if (!is_array($push_arr) || !is_array($pop_arr) || (count($push_arr) != count($pop_arr))) {
         return false;
     }
@@ -590,7 +611,8 @@ function IsPopOrder($push_arr, $pop_arr) {
  * @param $root TreeNode
  * @return array
  */
-function PrintFromTopToBottom($root) {
+function PrintFromTopToBottom($root)
+{
     if (empty($root)) {
         return [];
     }
@@ -626,7 +648,8 @@ function PrintFromTopToBottom($root) {
  * @param $sequence array
  * @return bool
  */
-function VerifySquenceOfBST($sequence) {
+function VerifySquenceOfBST($sequence)
+{
     if (!$sequence) return false;
     while (count($sequence) > 2) {
         $root = array_pop($sequence);
@@ -647,7 +670,8 @@ function VerifySquenceOfBST($sequence) {
  * @param $sum_val int
  * @return array
  */
-function FindPath($root, $sum_val) {
+function FindPath($root, $sum_val)
+{
     if (!$root) return [];
     if (!is_int($sum_val) && !is_float($sum_val)) return [];
     $path_all = [];//所有路径
@@ -669,7 +693,8 @@ function FindPath($root, $sum_val) {
  * @param $path_val
  * @param $path_all_val
  */
-function getAllPath($root, &$path_all_val, &$path_val = []) {
+function getAllPath($root, &$path_all_val, &$path_val = [])
+{
     $path_val[] = $root->val;
     if ($root->left || $root->right) {
         if ($root->left) getAllPath($root->left, $path_all_val, $path_val);
@@ -688,7 +713,8 @@ function getAllPath($root, &$path_all_val, &$path_val = []) {
  * @param $list_head RandomListNode
  * @return RandomListNode
  */
-function MyClone($list_head) {
+function MyClone($list_head)
+{
     if (!$list_head) return null;
     $old_arr = $cloned_arr = [];
     $new_list = cloneList($list_head, $old_arr, $cloned_arr);
@@ -710,7 +736,8 @@ function MyClone($list_head) {
  * @param $cloned
  * @return RandomListNode|null
  */
-function cloneList($list_head, &$old, &$cloned) {
+function cloneList($list_head, &$old, &$cloned)
+{
     if (!$list_head) return null;
     $new_node = new RandomListNode($list_head->label);
     $old[] = $list_head;
@@ -729,7 +756,8 @@ function cloneList($list_head, &$old, &$cloned) {
  * @param $end TreeNode
  * @return TreeNode
  */
-function Convert($root, &$start = null, &$end = null) {
+function Convert($root, &$start = null, &$end = null)
+{
     if (!$root) return null;
     $tmp_start = null;
     $tmp_end = null;
@@ -761,7 +789,8 @@ function Convert($root, &$start = null, &$end = null) {
  * @param $str string
  * @return array
  */
-function Permutation($str) {
+function Permutation($str)
+{
     if (strlen($str) > 9 || (empty($str) && $str != '0')) return [];
     //只有一个字符 直接返回
     if (strlen($str) == 1) return [$str];
@@ -791,7 +820,8 @@ function Permutation($str) {
  * @param $result array
  * @return void
  */
-function getStrArray($char, &$result) {
+function getStrArray($char, &$result)
+{
 
     if (empty($result)) {
         $result = [[$char]];
@@ -820,7 +850,8 @@ function getStrArray($char, &$result) {
  * @param $numbers array
  * @return int
  */
-function MoreThanHalfNum_Solution($numbers) {
+function MoreThanHalfNum_Solution($numbers)
+{
     if (!$numbers || !is_array($numbers)) return 0;
     if (count($numbers) == 1) return $numbers[0];
     $all_count = [];
@@ -845,7 +876,8 @@ function MoreThanHalfNum_Solution($numbers) {
  * @param $k int
  * @return array
  */
-function GetLeastNumbers_Solution($input, $k) {
+function GetLeastNumbers_Solution($input, $k)
+{
     if (empty($input) || !is_array($input) || !$k) return [];
     //构建容量为 K 的最小堆
     $heap = [];
@@ -864,7 +896,8 @@ function GetLeastNumbers_Solution($input, $k) {
  * @param $heap array
  * @param $val int
  */
-function heapInsert(&$heap, $val) {
+function heapInsert(&$heap, $val)
+{
     if (empty($heap)) {//空堆初始化
         $heap = [$val];
         return;
@@ -885,11 +918,12 @@ function heapInsert(&$heap, $val) {
 }
 
 /**
- * 小顶堆插入
+ * 小顶堆删除
  * @param $heap array
  * @return int
  */
-function heapShift(&$heap) {
+function heapShift(&$heap)
+{
     if (empty($heap)) return null;
     if (count($heap) == 1) return array_pop($heap);
     $min = $heap[0];
@@ -907,4 +941,32 @@ function heapShift(&$heap) {
         } else break;
     }
     return $min;
+}
+
+/**
+ * 连续子数组的最大和
+ *
+ * {6,-3,-2,7,-15,1,2,2},连续子向量的最大和为8(从第0个开始,到第3个为止)。
+ * 给一个数组，返回它的最大连续子序列的和(子向量的长度至少是1)
+ * @param array $arr
+ * @return int
+ */
+function FindGreatestSumOfSubArray($arr)
+{//使用动态规划 到第i位的最大值
+    if(!$arr) return false;
+    $max = $arr[0];
+
+    for($i=0;$i<ok($arr);$i++){
+        $cur = $arr[$i];
+        if($cur>$max || $max===null){
+            $max = $cur;
+        }
+        for($j=$i+1;$j<count($arr);$j++){
+            $cur += $arr[$j];
+            if($cur>$max || $max===null){
+                $max = $cur;
+            }
+        }
+    }
+    return $max;
 }

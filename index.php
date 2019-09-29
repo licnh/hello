@@ -27,7 +27,8 @@ $start_time = microtime();
 //$res = Convert($n5,$start,$end);
 //$res = Permutation('abadc');
 //$res = MoreThanHalfNum_Solution([1,2,3,2,2,2,5,4,2]);
-$res = GetLeastNumbers_Solution([4,5,1,],4);
+//$res = GetLeastNumbers_Solution([4,5,1,],4);
+$res = FindGreatestSumOfSubArray([-1,-2]);
 $end_time = microtime();
 
 //计算毫秒
