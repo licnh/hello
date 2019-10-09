@@ -29,7 +29,8 @@ $start_time = microtime();
 //$res = MoreThanHalfNum_Solution([1,2,3,2,2,2,5,4,2]);
 //$res = GetLeastNumbers_Solution([4,5,1,],4);
 //$res = FindGreatestSumOfSubArray([2,-8,1,5,9]);
-$res = FindGreatestSumOfSubArray2([2,-8,1,5,9]);
+//$res = FindGreatestSumOfSubArray2([2,-8,1,5,9]);
+$res = NumberOf1Between1AndN_Solution(1.1);
 $end_time = microtime();
 
 //计算毫秒

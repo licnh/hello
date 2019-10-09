@@ -988,9 +988,24 @@ function FindGreatestSumOfSubArray2($arr)
 {
     if (!$arr) return false;
     $max = $i_max = $arr[0];
-    for($i=1;$i<count($arr) ;$i++){
-        $i_max = $arr[$i] + $i_max >$arr[$i]?$arr[$i] + $i_max: $arr[$i];
-        if($max<$i_max) $max = $i_max;
+    for ($i = 1; $i < count($arr); $i++) {
+        $i_max = $arr[$i] + $i_max > $arr[$i] ? $arr[$i] + $i_max : $arr[$i];
+        if ($max < $i_max) $max = $i_max;
     }
     return $max;
+}
+
+/**
+ * 求任意非负整数区间中1出现的次数（从1 到 n 中1出现的次数）
+ * 如 n=13 包含1的数字有1、10、11、12、13
+ *
+ * @param $n int
+ * @return false|int
+ */
+function NumberOf1Between1AndN_Solution($n)
+{
+    /**
+     * 简单粗暴一行搞定  完全没效率数字太大生成的字符串还会占用超大内存  崩沙卡拉卡
+     */
+    return (int)$n < 1 ? 0 : substr_count(implode('', range(1, (int)$n)), 1);
 }
