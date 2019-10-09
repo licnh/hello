@@ -944,7 +944,7 @@ function heapShift(&$heap)
 }
 
 /**
- * 连续子数组的最大和
+ * 连续子数组的最大和 暴力解法
  *
  * {6,-3,-2,7,-15,1,2,2},连续子向量的最大和为8(从第0个开始,到第3个为止)。
  * 给一个数组，返回它的最大连续子序列的和(子向量的长度至少是1)
@@ -952,21 +952,45 @@ function heapShift(&$heap)
  * @return int
  */
 function FindGreatestSumOfSubArray($arr)
-{//使用动态规划 到第i位的最大值
-    if(!$arr) return false;
+{
+    if (!$arr) return false;
     $max = $arr[0];
 
-    for($i=0;$i<ok($arr);$i++){
+    for ($i = 0; $i < count($arr); $i++) {
         $cur = $arr[$i];
-        if($cur>$max || $max===null){
+        if ($cur > $max || $max === null) {
             $max = $cur;
         }
-        for($j=$i+1;$j<count($arr);$j++){
+        for ($j = $i + 1; $j < count($arr); $j++) {
             $cur += $arr[$j];
-            if($cur>$max || $max===null){
+            if ($cur > $max || $max === null) {
                 $max = $cur;
             }
         }
+    }
+    return $max;
+}
+
+/**
+ * 连续子数组的最大和
+ * 给一个数组，返回它的最大连续子序列的和(子向量的长度至少是1)
+ *
+ * 使用动态规划
+ * 以i为结尾的子数组的和的最大值可能为0-i项相加或第i项
+ *  即： f(i) = max( f(i-1) + $arr[$i], $arr[$i])
+ * 最大子向量为 max(f(0),...,f(count($arr)))
+ * {6,-3,-2,7,-15,1,2,2},连续子向量的最大和为8(从第0个开始,到第3个为止)。
+ *
+ * @param array $arr
+ * @return int
+ */
+function FindGreatestSumOfSubArray2($arr)
+{
+    if (!$arr) return false;
+    $max = $i_max = $arr[0];
+    for($i=1;$i<count($arr) ;$i++){
+        $i_max = $arr[$i] + $i_max >$arr[$i]?$arr[$i] + $i_max: $arr[$i];
+        if($max<$i_max) $max = $i_max;
     }
     return $max;
 }
