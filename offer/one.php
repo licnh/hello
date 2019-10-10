@@ -1009,3 +1009,23 @@ function NumberOf1Between1AndN_Solution($n)
      */
     return (int)$n < 1 ? 0 : substr_count(implode('', range(1, (int)$n)), 1);
 }
+
+/**
+ * 打印最小数字
+ *
+ * 输入一个正整数数组，把数组里所有数字拼接起来排成一个数，打印能拼接出的所有数字中最小的一个
+ *
+ * @param $numbers array
+ * @return int
+ */
+function PrintMinNumber($numbers)
+{
+    if(count($numbers)<=1) return current($numbers);
+
+    usort($numbers,function ($a,$b){
+        $a_str = ''.$a;
+        $b_str = ''.$b;
+        return $a_str.$b_str>$b_str.$a_str;
+    });
+    return implode("",$numbers);
+}
