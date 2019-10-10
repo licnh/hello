@@ -1029,3 +1029,27 @@ function PrintMinNumber($numbers)
     });
     return implode("",$numbers);
 }
+
+/**
+ * 第N个丑数
+ * 只包含质因子2、3和5的数称作丑数（Ugly Number）。例如6、8都是丑数，但14不是
+ * @param $n int
+ * @return int
+ */
+function GetUglyNumber_Solution($n)
+{
+    if($n<1) return 0;
+    $num_list = [1];
+    $i2 = $i3 = $i5 = 0;
+    while ((count($num_list)) < $n){
+        $num2 = $num_list[$i2] * 2;
+        $num3 = $num_list[$i3] * 3;
+        $num5 = $num_list[$i5] * 5;
+        $num = min($num2, $num3, $num5);
+        if ($num == $num2) $i2++;
+        if ($num == $num3) $i3++;
+        if ($num == $num5) $i5++;
+        $num_list[]=$num;
+    }
+    return array_pop($num_list);
+}

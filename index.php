@@ -31,7 +31,8 @@ $start_time = microtime();
 //$res = FindGreatestSumOfSubArray([2,-8,1,5,9]);
 //$res = FindGreatestSumOfSubArray2([2,-8,1,5,9]);
 //$res = NumberOf1Between1AndN_Solution(11.1);
-$res = PrintMinNumber([3,1,123,7,9,456]);
+//$res = PrintMinNumber([3,1,123,7,9,456]);
+$res = GetUglyNumber_Solution(2);
 $end_time = microtime();
 
 //计算毫秒
