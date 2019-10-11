@@ -1011,7 +1011,6 @@ function NumberOf1Between1AndN_Solution($n)
 }
 
 /**
-/**
  * 把数组排成最小的数
  *
  * 输入一个正整数数组，把数组里所有数字拼接起来排成一个数，打印能拼接出的所有数字中最小的一个
@@ -1026,14 +1025,14 @@ function NumberOf1Between1AndN_Solution($n)
  */
 function PrintMinNumber($numbers)
 {
-    if(count($numbers)<=1) return current($numbers);
+    if (count($numbers) <= 1) return current($numbers);
 
-    usort($numbers,function ($a,$b){
-        $a_str = ''.$a;
-        $b_str = ''.$b;
-        return $a_str.$b_str>$b_str.$a_str;
+    usort($numbers, function ($a, $b) {
+        $a_str = '' . $a;
+        $b_str = '' . $b;
+        return $a_str . $b_str > $b_str . $a_str;
     });
-    return implode("",$numbers);
+    return implode("", $numbers);
 }
 
 /**
@@ -1044,10 +1043,10 @@ function PrintMinNumber($numbers)
  */
 function GetUglyNumber_Solution($n)
 {
-    if($n<1) return 0;
+    if ($n < 1) return 0;
     $num_list = [1];
     $i2 = $i3 = $i5 = 0;
-    while ((count($num_list)) < $n){
+    while ((count($num_list)) < $n) {
         $num2 = $num_list[$i2] * 2;
         $num3 = $num_list[$i3] * 3;
         $num5 = $num_list[$i5] * 5;
@@ -1055,7 +1054,29 @@ function GetUglyNumber_Solution($n)
         if ($num == $num2) $i2++;
         if ($num == $num3) $i3++;
         if ($num == $num5) $i5++;
-        $num_list[]=$num;
+        $num_list[] = $num;
     }
     return array_pop($num_list);
+}
+
+/**
+ * 第一个只出现一次的字符
+ * 在一个字符串(0<=字符串长度<=10000，全部由字母组成)中找到第一个只出现一次的字符,并返回它的位置, 如果没有则返回 -1,需要区分大小写
+ * @param $str string
+ * @return string|int
+ */
+function FirstNotRepeatingChar($str)
+{
+    $arr = [];
+    for ($i = 0; $i < strlen($str); $i++) {
+        if (isset($arr[$str[$i]])) {
+            $arr[$str[$i]]['count']++;
+        } else {
+            $arr[$str[$i]] = ['idx' => $i, 'count' => 1];
+        }
+    }
+    foreach ($arr as $item) {
+        if ($item['count'] === 1) return $item['idx'];
+    }
+    return -1;
 }
