@@ -1080,3 +1080,25 @@ function FirstNotRepeatingChar($str)
     }
     return -1;
 }
+
+/**
+ * 数组中的逆序对
+ * 在数组中的两个数字，如果前面一个数字大于后面的数字，则这两个数字组成一个逆序对。
+ * 输入一个数组,求出这个数组中的逆序对的总数P。并将P对1000000007取模的结果输出。 即输出P%1000000007
+ * @param $data array
+ * @return int
+ */
+function InversePairs($data)
+{
+    $count = 0;
+    //这种排序不行
+    //todo: 换成归并排序
+    usort($data,function ($a,$b) use(&$count){
+        if($a>$b){
+            $count++;
+            return 1;
+        }
+        return -1;
+    });
+    return $count%1000000007;
+}

@@ -33,7 +33,8 @@ $start_time = microtime();
 //$res = NumberOf1Between1AndN_Solution(11.1);
 //$res = PrintMinNumber([3,1,123,7,9,456]);
 //$res = GetUglyNumber_Solution(2);
-$res = FirstNotRepeatingChar('google');
+//$res = FirstNotRepeatingChar('google');
+$res = InversePairs([1,2,3,4,5,6,7,0]);
 $end_time = microtime();
 
 //计算毫秒

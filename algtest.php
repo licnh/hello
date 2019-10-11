@@ -3,7 +3,8 @@
 /**
  * 基础算法
  */
-class AlgTest{
+class AlgTest
+{
 
     /**
      * 堆排序
@@ -11,24 +12,25 @@ class AlgTest{
      * 之后未排序队列继续循环构建大顶堆
      * 时间复杂度 O(nlgn)
      * @access  public
-     * @param   array $arr 待排序数组
-     * @var     integer $last 未排序队列最后一个元素的下标
+     * @param array $arr 待排序数组
      * @return  boolean 是否成功
+     * @var     integer $last 未排序队列最后一个元素的下标
      */
-    public function heapSort(array &$arr){
+    public function heapSort(array &$arr)
+    {
         //检查数组
-        if (!$this->checkArr($arr)){
+        if (!$this->checkArr($arr)) {
             return false;
         }
         //判断数组长度
-        if (count($arr) == 1){
+        if (count($arr) == 1) {
             return true;
         }
 
         $last = count($arr) - 1;
-        for(; $last>0; $last--){
+        for (; $last > 0; $last--) {
             $this->sortNodeIter($arr, $last);
-            $this->swap($arr[0],$arr[$last]);
+            $this->swap($arr[0], $arr[$last]);
         }
         return true;
     }
@@ -39,18 +41,19 @@ class AlgTest{
      * @param integer $last 未排序队列最后一个元素的下标
      * @var   integer $idx 当前要比较的节点，即最后一个未入堆的非叶子节点下标
      */
-    private function sortNodeIter(array &$arr, $last){
+    private function sortNodeIter(array &$arr, $last)
+    {
         $idx = floor(($last + 1) / 2) - 1;
         for (; $idx >= 0; $idx--) {
             $max_idx = $idx;
             $l_idx = $idx * 2 + 1;
-            if($l_idx <= $last){
+            if ($l_idx <= $last) {
                 $max_idx = $arr[$l_idx] > $arr[$max_idx] ? $l_idx : $max_idx;
-                if($l_idx + 1 <= $last){
-                    $max_idx = $arr[$l_idx+1] > $arr[$max_idx] ? $l_idx + 1 : $max_idx;
+                if ($l_idx + 1 <= $last) {
+                    $max_idx = $arr[$l_idx + 1] > $arr[$max_idx] ? $l_idx + 1 : $max_idx;
                 }
             }
-            if($max_idx != $idx){
+            if ($max_idx != $idx) {
                 $this->swap($arr[$max_idx], $arr[$idx]);
             }
         }
@@ -62,22 +65,23 @@ class AlgTest{
      * @param integer $last 未排序队列最后一个元素的下标
      * @param integer $idx 当前要比较的节点，即最后一个未入堆的非叶子节点下标
      */
-    private function sortNodeRec(array &$arr, $last, $idx = -1){
-        if($idx < 0)
+    private function sortNodeRec(array &$arr, $last, $idx = -1)
+    {
+        if ($idx < 0)
             $idx = floor(($last + 1) / 2) - 1;
         $max_idx = $idx;
-        $l_idx = $idx*2+1;
-        if($l_idx <= $last){
+        $l_idx = $idx * 2 + 1;
+        if ($l_idx <= $last) {
             $max_idx = $arr[$l_idx] > $arr[$max_idx] ? $l_idx : $max_idx;
-            if($l_idx+1 <= $last){
-                $max_idx = $arr[$l_idx+1] > $arr[$max_idx] ? $l_idx+1 : $max_idx;
+            if ($l_idx + 1 <= $last) {
+                $max_idx = $arr[$l_idx + 1] > $arr[$max_idx] ? $l_idx + 1 : $max_idx;
             }
         }
-        if($max_idx != $idx){
+        if ($max_idx != $idx) {
             $this->swap($arr[$max_idx], $arr[$idx]);
         }
-        if($idx>0){
-            $this->sortNodeRec($arr, $last, $idx-1);
+        if ($idx > 0) {
+            $this->sortNodeRec($arr, $last, $idx - 1);
         }
     }
 
@@ -89,20 +93,21 @@ class AlgTest{
      * @param array $arr
      * @return bool
      */
-    public function bubbleSort(array &$arr){
+    public function bubbleSort(array &$arr)
+    {
         //检查数组
-        if (!$this->checkArr($arr)){
+        if (!$this->checkArr($arr)) {
             return false;
         }
         //判断数组长度
-        if (count($arr) == 1){
+        if (count($arr) == 1) {
             return true;
         }
         $last = count($arr) - 1;
-        for ($i = 0; $i < count($arr) - 1; $i++, $last--){
-            for($j= 0; $j < $last; $j++){
-                if($arr[$j] > $arr[$j+1]){
-                    $this->swap($arr[$j], $arr[$j+1]);
+        for ($i = 0; $i < count($arr) - 1; $i++, $last--) {
+            for ($j = 0; $j < $last; $j++) {
+                if ($arr[$j] > $arr[$j + 1]) {
+                    $this->swap($arr[$j], $arr[$j + 1]);
                 }
             }
         }
@@ -117,13 +122,14 @@ class AlgTest{
      * @param array $arr
      * @return bool
      */
-    public function quickSort(array &$arr){
+    public function quickSort(array &$arr)
+    {
         //检查数组
-        if (!$this->checkArr($arr)){
+        if (!$this->checkArr($arr)) {
             return false;
         }
         //判断数组长度
-        if (count($arr) == 1){
+        if (count($arr) == 1) {
             return true;
         }
         $stack = array($arr);
@@ -144,9 +150,9 @@ class AlgTest{
             //用两个数组分别接受比$mark小和比$mark大的数据
             for ($i = 1; $i < count($current_arr); $i++) {
                 if ($current_arr[$i] <= $mark) {
-                    array_push($small,$current_arr[$i]);
+                    array_push($small, $current_arr[$i]);
                 } else {
-                    array_push($big,$current_arr[$i]);
+                    array_push($big, $current_arr[$i]);
                 }
             }
 
@@ -169,39 +175,41 @@ class AlgTest{
      * @param array $arr
      * @return bool
      */
-    public function quickSortRec(array &$arr){
+    public function quickSortRec(array &$arr)
+    {
         //检查数组
-        if (!$this->checkArr($arr)){
+        if (!$this->checkArr($arr)) {
             return false;
         }
         //判断数组长度
-        if (count($arr) == 1){
+        if (count($arr) == 1) {
             return true;
         }
-        $this->quickRec($arr, 0, count($arr)-1);
+        $this->quickRec($arr, 0, count($arr) - 1);
         return true;
     }
 
     //递归快排
-    private function quickRec(&$arr, $left, $right){
-        if($left>=$right) return;
+    private function quickRec(&$arr, $left, $right)
+    {
+        if ($left >= $right) return;
         $temp = $arr[$left];
         $i = $left;
         $j = $right;
-        while ($i < $j){
-            while($i < $j && $arr[$j] > $temp){
+        while ($i < $j) {
+            while ($i < $j && $arr[$j] > $temp) {
                 $j--;
             }
-            while($i < $j && $arr[$i] <= $temp ){
+            while ($i < $j && $arr[$i] <= $temp) {
                 $i++;
             }
-            if($i < $j){
+            if ($i < $j) {
                 $this->swap($arr[$i], $arr[$j]);
             }
 
         }
-        if($left<$i){
-            $this->swap($arr[$left],$arr[$i]);
+        if ($left < $i) {
+            $this->swap($arr[$left], $arr[$i]);
         }
         $this->quickRec($arr, $left, $i - 1);
         $this->quickRec($arr, $i + 1, $right);
@@ -209,50 +217,58 @@ class AlgTest{
     }
 
 
-
     //交换两个变量的值
-    private function swap(&$a, &$b){
+    private function swap(&$a, &$b)
+    {
         //当ab相等时为0
-        if($a == $b) return;
+        if ($a == $b) return;
         $a ^= $b ^= $a ^= $b;
     }
 
     //检查数组
-    private function checkArr(array $arr){
-        if (!$arr || !is_array($arr)){
+    private function checkArr(array $arr)
+    {
+        if (!$arr || !is_array($arr)) {
             return false;
         }
         return true;
     }
 
     //展示排序功能
-    public function showSort($count = 100){
+    public function showSort($count = 100)
+    {
         //设置网页不超时 防止排序时间过长
         set_time_limit(100);
         //生成数组，随机排序
-        $arr = range(1,$count);
+        $arr = range(1, $count);
         shuffle($arr);
+        echo "排序：" . implode(", ", $arr) . PHP_EOL;
+        $arr1 = $arr;
+        $this->activeSort($arr1, "bubbleSort");
+        $arr1 = $arr;
+        $this->activeSort($arr1, "heapSort");
+        $arr1 = $arr;
+        $this->activeSort($arr1, "quickSort");
+        $arr1 = $arr;
+        $this->activeSort($arr1, "quickSortRec");
 
-        $this->activeSort($arr,"bubbleSort");
-        $this->activeSort($arr,"heapSort");
-        $this->activeSort($arr,"quickSort");
-        $this->activeSort($arr,"quickSortRec");
 
-        echo "排序后：".implode(", ", $arr)."<br>";
+        echo "排序后：" . implode(", ", $arr1) . PHP_EOL;
     }
 
-    private function activeSort(array &$arr, $do = "bubbleSort", $parameter = null){
-        if(!method_exists($this, $do))
-            exit("<hr>不存在方法 $do");
+    private function activeSort(array &$arr, $do = "bubbleSort", $parameter = null)
+    {
+        if (!method_exists($this, $do))
+            exit("======= 不存在方法 $do =======");
         $t = -microtime(true);
-        shuffle($arr);
-        if($parameter ? !$this->$do($arr, $parameter) : !$this->$do($arr)){
-            exit("<hr>$do 出错skrskrskr！！！");
+        if ($parameter ? !$this->$do($arr, $parameter) : !$this->$do($arr)) {
+            exit("======= $do 出错skrskrskr！！！ =======");
         }
-        $t = round(($t + microtime(true))*1000, 2);
-        echo "$do 用时 $t ms <br>";
+        $t = round(($t + microtime(true)) * 1000, 2);
+        echo "$do 用时 $t ms " . PHP_EOL;
     }
 }
 
 
-(new AlgTest())->showSort(5);
+(new AlgTest())->showSort(11111);
+exit();
